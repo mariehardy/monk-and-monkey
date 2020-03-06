@@ -33,19 +33,22 @@ class GameCanvas {
       this.context = document.getElementById('canvas').getContext('2d');
       this.canvas.width = width;
       this.canvas.height = height;
+      this.width = this.canvas.width;
+      this.height = this.canvas.height;
+
     }
   
     createBoard() {
       this.context.clearRect(0, 0, this.width, this.height)
+      console.log(this.height)
       this.draw()
     }
 
     draw() {
-        let monk = new Monk(10, 30, 0, 200);
+        let monk = new Monk(200, 200, 200, 200);
         let monkey = new Monkey();
-        console.log(monk.width)
-        monk.update()
-        
+        // monk.pray()
+
         
             
         window.requestAnimationFrame(gameCanvas.draw)
