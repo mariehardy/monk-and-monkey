@@ -47,6 +47,8 @@ class GameCanvas {
     draw() {
         let monk = new Monk(200, 200, 200, 200);
         let monkey = new Monkey();
+        monk.loadAndDrawImage("https://banner2.cleanpng.com/20180325/ute/kisspng-emoji-love-heart-sticker-emoticon-emoji-5ab86fdec2e6d0.1707378915220367027983.jpg")
+
         // monk.pray()
 
         
