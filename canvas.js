@@ -1,4 +1,6 @@
-// var obstacleArr = [];
+
+let canvas = document.getElementById('canvas');
+let context = document.getElementById('canvas').getContext('2d');
 
 
 // var myGameArea = {
@@ -27,6 +29,12 @@
 
 
 
+// array of all obstacles
+let monkeyArr = []
+
+let frameCounter = 0
+
+
 class GameCanvas {
     constructor(width, height) {
       this.canvas = document.getElementById('canvas')
@@ -37,23 +45,66 @@ class GameCanvas {
       this.height = this.canvas.height;
 
     }
+
+    clearBoard() {
+      this.context.clearRect(0, 0, this.width, this.height)
+    }
   
     createBoard() {
-      this.context.clearRect(0, 0, this.width, this.height)
-      console.log(this.height)
+      this.clearBoard()
       this.draw()
     }
 
     draw() {
-        let monk = new Monk(200, 200, 200, 200);
-        let monkey = new Monkey();
-        monk.loadAndDrawImage("https://banner2.cleanpng.com/20180325/ute/kisspng-emoji-love-heart-sticker-emoticon-emoji-5ab86fdec2e6d0.1707378915220367027983.jpg")
+        // context.clearRect(0, 0, gameCanvas.width, gameCanvas.height)
+        gameCanvas.clearBoard() 
+        frameCounter ++
+        // console.log(frameCounter)
 
-        // monk.pray()
 
+        // let monk = new Monk(20, 300, 30, 30, 70);
+        let monkey1 = new Monkey(330, 300, 70, 70, 30);
+
+        // monk.loadAndDrawImage(monk, "https://banner2.cleanpng.com/20180325/ute/kisspng-emoji-love-heart-sticker-emoticon-emoji-5ab86fdec2e6d0.1707378915220367027983.jpg")
+        // monkey1.loadAndDrawImage(monkey1, "https://banner2.cleanpng.com/20180325/ute/kisspng-emoji-love-heart-sticker-emoticon-emoji-5ab86fdec2e6d0.1707378915220367027983.jpg")
+
+        // monk.loadAndDrawImage(monk)
+
+        monk.update()
+
+
+        monkeyArr.forEach((o) => {
         
-            
+          // if (car.crashWith(o)) {
+          //     gameRunning = false
+          //     gameOver()  //MAKE GAME OVER
+          //     return
+          // }
+          o.update()
+          console.log(monkeyArr)
+      })
+  
+      // car.update();
+  
+  
+      // after each 1 second
+      if (frameCounter % 60 === 0) {
+          // monkey1.update()
+
+          let randomPosX = Math.floor(Math.random() * 300)
+          monkeyArr.push(new Monkey(randomPosX))    
+          monkeyArr.push(new Monkey(randomPosX)) 
+          console.log('monkeyArr is ' + monkeyArr)
+      }
+
+
+
+
+
+
         window.requestAnimationFrame(gameCanvas.draw)
     }
 
     }
+
+    
