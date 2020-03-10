@@ -33,6 +33,48 @@
 
 
 
+let gameRunning = true
+
+
+
+
+// let img = new Image();
+// img.src = 'https://orig15.deviantart.net/8bed/f/2015/058/a/8/smb1_background_by_steamerthesteamtrain-d8jq7ea.png';
+
+
+
+let backgroundImage = {
+  // img: img,
+  x: 0,
+  speed: -1,
+
+  move: function() {
+    this.x += this.speed;
+    this.x %= canvas.width;
+  },
+
+  drawLandscape: function() {
+    let img = new Image();
+    img.src = 'https://orig15.deviantart.net/8bed/f/2015/058/a/8/smb1_background_by_steamerthesteamtrain-d8jq7ea.png';
+    img.onload = context.drawImage(img, this.x, 0);
+    if (this.speed < 0) {
+      context.drawImage(img, this.x + canvas.width, 0);
+    } else {
+      context.drawImage(img, this.x - img.width, 0);
+    }
+  },
+
+  drawStatue: function() {
+    let img = new Image();
+    img.src = 'https://banner2.cleanpng.com/20180325/ute/kisspng-emoji-love-heart-sticker-emoticon-emoji-5ab86fdec2e6d0.1707378915220367027983.jpg';
+    img.onload = context.drawImage(img, this.x, 0);
+    if (this.speed < 0) {
+      context.drawImage(img, this.x + canvas.width, 0);
+    } else {
+      context.drawImage(img, this.x - img.width, 0);
+    }
+  },
+};
 
 
 
@@ -40,8 +82,8 @@
 
 
 let monk = {
-  x : 20,
-  y : 200,
+  x : 40,
+  y : 370,
   width : 30,
   height : 30,
   speedX : 0,
@@ -59,27 +101,41 @@ let monk = {
   right: function () {
     return this.x + this.width
   },
-  crashWith: function (obstacle) {
+  crashWith: function (monkey) {
     return !(
-      this.bottom() < obstacle.top() ||
-      this.top() > obstacle.bottom() ||
-      this.right() < obstacle.left() ||
-      this.left() > obstacle.right()
+      this.bottom() < monkey.top() ||
+      this.top() > monkey.bottom() ||
+      this.right() < monkey.left() ||
+      this.left() > monkey.right()
     );
   },
   moveLeft: function () {
     if (this.x > 20) {
     this.x -= 4;
-    console.log('monk x is ' + this.x)
-    }     console.log('left boundary ' + this.x)
+    // console.log('monk x is ' + this.x)
+    }     
 
   },
   moveRight: function () {
     if (this.x < (canvas.width - 50)) {
     this.x += 4;
-    console.log('monk x is ' + this.x)
-    }     console.log('right boundary ' + this.x)
-
+    // console.log('monk x is ' + this.x)
+    }     
+  },
+  duck: function () {
+    if (this.height = 30) {
+      // this.y += this.height / 2;
+      this.height = this.height / 2;
+    } 
+  },
+  duckUp: function () {
+    this.height = 30
+    this.y = this.y;
+  },
+  shift: function () {
+    if (gameRunning) {
+      gameCanvas.pauseGame()
+    }
   },
   pray: function () {
     // kneel()  // canvas activity
@@ -100,7 +156,7 @@ let monk = {
     let img = new Image();
     // img.onload = function () {
       img.src = "https://banner2.cleanpng.com/20180325/ute/kisspng-emoji-love-heart-sticker-emoticon-emoji-5ab86fdec2e6d0.1707378915220367027983.jpg";
-      context.drawImage(img, this.x, this.y, this.width, this.height);
+      img.onload = context.drawImage(img, this.x, this.y, this.width, this.height);
     // }
   }
 
@@ -186,7 +242,7 @@ let monk = {
 // }
 
 
-
+let gravity = 0.1
 
 class Monkey {
   constructor(x) {
@@ -196,6 +252,8 @@ class Monkey {
     this.height = 50;
     this.speedX = 0;
     this.speedY = 0; 
+    this.velocityX = 5;
+    this.velocityY = 5;
   }
 
   top() {
@@ -215,12 +273,37 @@ class Monkey {
     let img = new Image();
     // img.onload = function () {
       img.src = "https://banner2.cleanpng.com/20180325/ute/kisspng-emoji-love-heart-sticker-emoticon-emoji-5ab86fdec2e6d0.1707378915220367027983.jpg";
-      context.drawImage(img, this.x, this.y, this.width, this.height);
-    this.y += 30
+      img.onload = context.drawImage(img, this.x, this.y, this.width, this.height);
+
+      // this.velocityY += gravity;
+      this.y += this.velocityY;
+      if (this.y + this.velocityY > canvas.height - 60 || this.y + this.velocityY < 0) {
+        this.velocityY *= -1;
+      } 
+      if (this.y === 0 || this.velocityY === -1) {
+        this.y=-100;
+      } 
+      // if (this.x + this.velocityX > canvas.width || this.x + this.velocityX < 0) {
+      //   this.velocityX *= -1;
+      // }
+    }
+
+    monkeyWins() {
+      // laughing monkey sound
+      // offering appears in  monkeys hands
+      // monkey goes back up with offering
+
+      // let img = new Image();
+      // img.src = "https://banner2.cleanpng.com/20180325/ute/kisspng-emoji-love-heart-sticker-emoticon-emoji-5ab86fdec2e6d0.1707378915220367027983.jpg";
+      // context.drawImage(img, this.x, this.y, this.width, this.height);
+      context.fillStyle = 'blue';
+      context.fillRect(this.x + 10, this.y + 10, 5, 5);
+      this.y=-5
+    }
+
   }
 
 
-}
 
 
 

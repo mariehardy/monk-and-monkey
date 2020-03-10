@@ -3,6 +3,11 @@ let canvas = document.getElementById('canvas');
 let context = document.getElementById('canvas').getContext('2d');
 
 
+
+
+
+
+
 // var myGameArea = {
 //   canvas: document.createElement("canvas"),
 //   start: function () {
@@ -35,6 +40,7 @@ let monkeyArr = []
 let frameCounter = 0
 
 
+
 class GameCanvas {
     constructor(width, height) {
       this.canvas = document.getElementById('canvas')
@@ -55,15 +61,41 @@ class GameCanvas {
       this.draw()
     }
 
+    gameOver() {
+      frameCounter = 0
+      gameCanvas.clearBoard() 
+      this.context.fillStyle = 'blue';
+      this.context.font = "30px Arial";
+      this.context.fillText("GAME OVER", 40, 40)
+    }
+
+    // pauseGame() {
+    //   if (!gameRunning) {
+    //   gameCanvas.clearBoard() 
+    //   this.context.fillStyle = 'blue';
+    //   this.context.fillRect(50, 50, 50, 50);
+    //   frameCounter = 0
+    //   }
+    // }
+
     draw() {
-        // context.clearRect(0, 0, gameCanvas.width, gameCanvas.height)
-        gameCanvas.clearBoard() 
         frameCounter ++
+        console.log(frameCounter)
+        gameCanvas.clearBoard() 
+
+        
+        backgroundImage.move();
+   
+        if (frameCounter < 200) {
+          backgroundImage.drawLandscape();
+        } else {
+          backgroundImage.drawStatue();
+        }
         // console.log(frameCounter)
 
 
         // let monk = new Monk(20, 300, 30, 30, 70);
-        let monkey1 = new Monkey(330, 300, 70, 70, 30);
+        // let monkey1 = new Monkey(330, 300, 70, 70, 30);
 
         // monk.loadAndDrawImage(monk, "https://banner2.cleanpng.com/20180325/ute/kisspng-emoji-love-heart-sticker-emoticon-emoji-5ab86fdec2e6d0.1707378915220367027983.jpg")
         // monkey1.loadAndDrawImage(monkey1, "https://banner2.cleanpng.com/20180325/ute/kisspng-emoji-love-heart-sticker-emoticon-emoji-5ab86fdec2e6d0.1707378915220367027983.jpg")
@@ -73,33 +105,33 @@ class GameCanvas {
         monk.update()
 
 
-        monkeyArr.forEach((o) => {
-        
-          // if (car.crashWith(o)) {
-          //     gameRunning = false
-          //     gameOver()  //MAKE GAME OVER
-          //     return
-          // }
-          o.update()
-          console.log(monkeyArr)
-      })
-  
-      // car.update();
   
   
       // after each 1 second
-      if (frameCounter % 60 === 0) {
-          // monkey1.update()
-
+      if (frameCounter % 80 === 0) {
           let randomPosX = Math.floor(Math.random() * 300)
           monkeyArr.push(new Monkey(randomPosX))    
           monkeyArr.push(new Monkey(randomPosX)) 
-          console.log('monkeyArr is ' + monkeyArr)
+          // console.log('monkeyArr is ' + monkeyArr)
       }
+      console.log(gameRunning)
 
 
 
-
+        // Check collision
+        monkeyArr.forEach((monkey) => {
+          if (monk.crashWith(monkey)) {
+              gameRunning = false
+              console.log(gameRunning)
+              // console.log('monk and monkey have crashed')
+              // monkey.monkeyWins()
+              // console.log(monkey.y)
+              gameCanvas.gameOver()  //MAKE GAME OVER
+              return 
+          }
+          monkey.update()
+      })
+  
 
 
         window.requestAnimationFrame(gameCanvas.draw)

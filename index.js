@@ -2,7 +2,7 @@
 
 window.onload = () => {
     document.getElementById('start-button').onclick = () => {
-      gameCanvas = new GameCanvas(600, 400);
+      gameCanvas = new GameCanvas(800, 400);
       gameCanvas.createBoard()
     };
   }
@@ -17,7 +17,13 @@ document.addEventListener('keydown', event => {   // The same as: document.keydo
   switch (event.keyCode) {
     case 37: monk.moveLeft();  console.log('left'); break;
     case 39: monk.moveRight(); console.log('right'); break;
-    // case 32: monk.spaceBar();  console.log('space bar'); break;
+    case 40: monk.duck(); console.log('keydown - duck'); break;
+    case 16: monk.shift();  console.log('shift'); break;
   }
-  // gameCanvas.createBoard()
+})
+document.addEventListener('keyup', event => {   // The same as: document.keydown = event => {
+  switch (event.keyCode) {
+    case 40: monk.duckUp(); console.log('keyup - duck'); break;
+
+  }
 })
