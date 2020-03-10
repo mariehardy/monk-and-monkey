@@ -1,142 +1,131 @@
-
 let canvas = document.getElementById('canvas');
 let context = document.getElementById('canvas').getContext('2d');
 
-
-
-
-
-
-
-// var myGameArea = {
-//   canvas: document.createElement("canvas"),
-//   start: function () {
-//     this.canvas.width = 480;
-//     this.canvas.height = 270;
-//     this.context = this.canvas.getContext("2d");
-//     document.body.insertBefore(this.canvas, document.body.childNodes[0]);
-//     this.clear = function () {
-//       this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-//     };
-//     // call updateGameArea() every 20 milliseconds
-//     this.interval = setInterval(updateGameArea, 20);
-//   },
-//   stop: function () {
-//     clearInterval(this.interval);
-//   },
-//   score: function() {
-//     var points = Math.floor(this.frames / 5);
-//     this.context.font = "18px serif";
-//     this.context.fillStyle = "black";
-//     this.context.fillText("Score: " + points, 350, 50);
-//   }
-// };
-
-
-
-// array of all obstacles
-let monkeyArr = []
+let monkeyArr = [] // array of all obstacles
 
 let frameCounter = 0
 
 
 
 class GameCanvas {
-    constructor(width, height) {
-      this.canvas = document.getElementById('canvas')
-      this.context = document.getElementById('canvas').getContext('2d');
-      this.canvas.width = width;
-      this.canvas.height = height;
-      this.width = this.canvas.width;
-      this.height = this.canvas.height;
+  constructor(width, height) {
+    this.canvas = document.getElementById('canvas')
+    this.context = document.getElementById('canvas').getContext('2d');
+    this.canvas.width = width;
+    this.canvas.height = height;
+    this.width = this.canvas.width;
+    this.height = this.canvas.height;
 
+  }
+
+  clearBoard() {
+    this.context.clearRect(0, 0, this.width, this.height)
+  }
+
+  createBoard() {
+    this.clearBoard()
+    this.draw()
+  }
+
+  gameOver() {
+    // frameCounter = 0
+    // gameCanvas.clearBoard() 
+    gameRunning = false
+    console.log('gameRunning is ' + gameRunning)
+    this.context.fillStyle = 'blue';
+    this.context.font = "30px Arial";
+    this.context.fillText("GAME OVER", 200, 200)
+  }
+
+  // Reset game to original state
+// function reset() {
+//   document.getElementById('game-over').style.display = 'none';
+//   document.getElementById('game-over-overlay').style.display = 'none';
+//   isGameOver = false;
+//   gameTime = 0;
+//   score = 0;
+
+//   enemies = [];
+//   bullets = [];
+
+//   player.pos = [50, canvas.height / 2];
+// };
+
+  // pauseGame() {
+  //   if (!gameRunning) {
+  //   gameCanvas.clearBoard() 
+  //   this.context.fillStyle = 'blue';
+  //   this.context.fillRect(50, 50, 50, 50);
+  //   frameCounter = 0
+  //   }
+  // }
+
+  draw() {
+    frameCounter++
+    // console.log(frameCounter)
+    gameCanvas.clearBoard()
+
+    // BACKGROUND
+    // console.log("here")
+    // console.log(backgroundImage.totalX)
+    // console.log(-(canvas.width * 3))
+    backgroundImage.move();
+
+    if (backgroundImage.totalX > -(canvas.width * 0)) {
+      backgroundImage.drawLandscape();
+    } else if ((backgroundImage.totalX > -(canvas.width * 1))) {
+      backgroundImage.drawTransition();
+    } 
+    else {
+      backgroundImage.stopMoving()
+      backgroundImage.drawStatue();
     }
 
-    clearBoard() {
-      this.context.clearRect(0, 0, this.width, this.height)
+    // DRAW PLAYER
+    monk.update()
+
+
+    // DRAW OBSTACLES
+
+
+    // It gets ***HARDER*** over time by adding enemies using this
+    // equation: 1-.993^gameTime
+  //   if(Math.random() < 1 - Math.pow(.993, gameTime)) {
+  //     enemies.push({
+  //         pos: [canvas.width,
+  //               Math.random() * (canvas.height - 39)],
+  //         sprite: new Sprite('img/sprites.png', [0, 78], [80, 39],
+  //                            6, [0, 1, 2, 3, 2, 1])
+  //     });
+  // }
+
+    // Monkeys fall after each 2 second
+    if (frameCounter % 120 === 0) {
+      let randomPosX = Math.floor(Math.random() * 400)
+      monkeyArr.push(new Monkey(randomPosX))
+      // monkeyArr.push(new Monkey(randomPosX)) 
     }
-  
-    createBoard() {
-      this.clearBoard()
-      this.draw()
-    }
+    console.log(gameRunning)
 
-    gameOver() {
-      frameCounter = 0
-      gameCanvas.clearBoard() 
-      this.context.fillStyle = 'blue';
-      this.context.font = "30px Arial";
-      this.context.fillText("GAME OVER", 40, 40)
-    }
+    // Check collision
+    monkeyArr.forEach((monkey) => {
 
-    // pauseGame() {
-    //   if (!gameRunning) {
-    //   gameCanvas.clearBoard() 
-    //   this.context.fillStyle = 'blue';
-    //   this.context.fillRect(50, 50, 50, 50);
-    //   frameCounter = 0
-    //   }
-    // }
-
-    draw() {
-        frameCounter ++
-        console.log(frameCounter)
-        gameCanvas.clearBoard() 
-
-        
-        backgroundImage.move();
-   
-        if (frameCounter < 200) {
-          backgroundImage.drawLandscape();
-        } else {
-          backgroundImage.drawStatue();
-        }
-        // console.log(frameCounter)
-
-
-        // let monk = new Monk(20, 300, 30, 30, 70);
-        // let monkey1 = new Monkey(330, 300, 70, 70, 30);
-
-        // monk.loadAndDrawImage(monk, "https://banner2.cleanpng.com/20180325/ute/kisspng-emoji-love-heart-sticker-emoticon-emoji-5ab86fdec2e6d0.1707378915220367027983.jpg")
-        // monkey1.loadAndDrawImage(monkey1, "https://banner2.cleanpng.com/20180325/ute/kisspng-emoji-love-heart-sticker-emoticon-emoji-5ab86fdec2e6d0.1707378915220367027983.jpg")
-
-        // monk.loadAndDrawImage(monk)
-
-        monk.update()
-
-
-  
-  
-      // after each 1 second
-      if (frameCounter % 80 === 0) {
-          let randomPosX = Math.floor(Math.random() * 300)
-          monkeyArr.push(new Monkey(randomPosX))    
-          monkeyArr.push(new Monkey(randomPosX)) 
-          // console.log('monkeyArr is ' + monkeyArr)
+      // PUT ALL THIS IN a CHECKCOLLISION FUNCTION
+      if (monk.crashWith(monkey)) {
+        // console.log('monk and monkey have crashed')
+        monkey.monkeyWins()
+        // console.log(monkey.y)
+        gameCanvas.gameOver() //MAKE GAME OVER
+        clearTimeout(gameCanvas.draw)
+        return
       }
-      console.log(gameRunning)
+      monkey.update()
+    })
 
-
-
-        // Check collision
-        monkeyArr.forEach((monkey) => {
-          if (monk.crashWith(monkey)) {
-              gameRunning = false
-              console.log(gameRunning)
-              // console.log('monk and monkey have crashed')
-              // monkey.monkeyWins()
-              // console.log(monkey.y)
-              gameCanvas.gameOver()  //MAKE GAME OVER
-              return 
-          }
-          monkey.update()
-      })
-  
-
-
-        window.requestAnimationFrame(gameCanvas.draw)
-    }
+    if (gameRunning) {
+      window.requestAnimationFrame(gameCanvas.draw)
 
     }
+  }
 
-    
+}
