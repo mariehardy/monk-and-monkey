@@ -1,3 +1,112 @@
+  // http://jlongster.github.io/canvas-game-bootstrap/
+
+
+// Sprite class
+
+  (function() {
+    function Sprite(url, pos, size, speed, frames, dir, once) {
+        this.pos = pos;
+        this.size = size;
+        this.speed = typeof speed === 'number' ? speed : 0;
+        this.frames = frames;
+        this._index = 0;
+        this.url = url;
+        this.dir = dir || 'horizontal';
+        this.once = once;
+    };
+
+    Sprite.prototype = {
+        update: function(dt) {
+            this._index += this.speed*dt;
+        },
+
+        render: function(context) {
+            var frame;
+
+            if(this.speed > 0) {
+                var max = this.frames.length;
+                var idx = Math.floor(this._index);
+                frame = this.frames[idx % max];
+
+                if(this.once && idx >= max) {
+                    this.done = true;
+                    return;
+                }
+            }
+            else {
+                frame = 0;
+            }
+
+
+            var x = this.pos[0];
+            var y = this.pos[1];
+
+            if(this.dir == 'vertical') {
+                y += frame * this.size[1];
+            }
+            else {
+                x += frame * this.size[0];
+            }
+
+            context.drawImage(resources.get(this.url),
+                          x, y,
+                          this.size[0], this.size[1],
+                          0, 0,
+                          this.size[0], this.size[1]);
+        }
+    };
+
+    window.Sprite = Sprite;
+})();
+
+// The main game loop
+// var lastTime;
+
+// function main() {
+//     var now = Date.now();
+//     var dt = (now - lastTime) / 1000.0;
+
+//     update(dt);
+//     // render();
+
+//     lastTime = now;
+//     requestAnimFrame(main);
+// };
+
+// var gameTime = 0;
+
+
+// function update(dt) {
+//   gameTime += dt;
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 let gameRunning = true
 
 let gravity = 0.2
@@ -57,15 +166,10 @@ let backgroundImage = {
 
 let monk = {
 
-  // http://jlongster.github.io/canvas-game-bootstrap/
-  
-  // var player = {
-  //   pos: [0, 0],
-  //   sprite: new Sprite('img/sprites.png', [0, 0], [39, 39], 16, [0, 1])
-  // };
-
   x : 40,
   y : 370,
+  pos: [0, 0],
+  sprite: new Sprite('img/sprites.png', [0, 0], [39, 39], 16, [0, 1]),
   width : 30,
   height : 30,
   speedX : 0,
@@ -108,12 +212,14 @@ let monk = {
     if (this.height = 30) {
       this.y += this.height / 2;
       this.height = this.height / 2;
-      
     } 
   },
   duckUp: function () {
+    // if (this.height = this.height / 2) {
+
     this.height = 30
     this.y -= this.height / 2;
+    // }
   },
   shift: function () {
     if (gameRunning) {
@@ -202,175 +308,3 @@ class Monkey {
     }
 
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-class Game {
-
-  // IMPLEMENT GAME LOGIC HERE -- FUNCTIONS
-
-}
-
-
-
-
-
-
-
-
-// context.drawImage(img,sx,sy,swidth,sheight,x,y,width,height);
-// sx  =		The x coordinate where to start clipping
-
-
-// **********************************
-// Loading the image programmatically
-// **********************************
-
-
-// function loadAndDrawImage(url)
-// {
-//     // Create an image object. This is not attached to the DOM and is not part of the page.
-//     var image = new Image();
-
-//     // When the image has loaded, draw it to the canvas
-//     image.onload = function()
-//     {
-//         // draw image...
-//     }
-
-//     // Now set the source of the image that we want to load
-//     image.src = url;
-// }
-// loadAndDrawImage("http://www.w3.org/html/logo/img/mark-word-icon.png");
-
-
-
-
-
-
-
-
-
-
-// class Component {
-//   constructor(x, y, width, height) {
-//     this.x = x;
-//     this.y = y;
-//     this.width = width;
-//     this.height = height;
-//     this.speedX = 0;
-//     this.speedY = 0;
-//   }
-
-//   loadAndDrawImage(obj, url) {
-//     let img = new Image();
-//     img.onload = function () {
-//       context.drawImage(img, obj.x, obj.y, obj.width, obj.height);
-//     }
-//     img.src = url;
-//   }
-
-//   //To add getters and setters in the class, use the get and set keywords.
-
-
-//   update() {
-//     context.fillStyle = 'red';
-//     context.fillRect(50, 50, 60, 60);
-//   }
-
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Constructor for the Sprite class
-
-// function Sprite(url, pos, size, speed, frames, dir, once) {
-//   this.pos = pos;
-//   this.size = size;
-//   this.speed = typeof speed === 'number' ? speed : 0;
-//   this.frames = frames;
-//   this._index = 0;
-//   this.url = url;
-//   this.dir = dir || 'horizontal';
-//   this.once = once;
-// };
-
-
-// Every Sprite object has an update method for updating the animation
-
-// Sprite.prototype.update = function(dt) {
-//   this._index += this.speed*dt;
-// }
-
-
-// Every Sprite object also has a render method for actually drawing itself
-
-// Sprite.prototype.render = function(ctx) {
-//   var frame;
-
-//   if(this.speed > 0) {
-//       var max = this.frames.length;
-//       var idx = Math.floor(this._index);
-//       frame = this.frames[idx % max];
-
-//       if(this.once && idx >= max) {
-//           this.done = true;
-//           return;
-//       }
-//   }
-//   else {
-//       frame = 0;
-//   }
-
-
-//   var x = this.pos[0];
-//   var y = this.pos[1];
-
-//   if(this.dir == 'vertical') {
-//       y += frame * this.size[1];
-//   }
-//   else {
-//       x += frame * this.size[0];
-//   }
-
-//   ctx.drawImage(resources.get(this.url),
-//                 x, y,
-//                 this.size[0], this.size[1],
-//                 0, 0,
-//                 this.size[0], this.size[1]);
-// }
-
-
-// in: Draw everything
-
-// function renderEntity(entity) {
-//   ctx.save();
-//   ctx.translate(entity.pos[0], entity.pos[1]);
-//   entity.sprite.render(ctx);
-//   ctx.restore();
-// }

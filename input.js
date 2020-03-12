@@ -21,9 +21,12 @@ document.addEventListener('keydown', event => {   // The same as: document.keydo
     case 16: monk.shift();  console.log('shift'); break;
   }
 })
-document.addEventListener('keyup', event => {   // The same as: document.keydown = event => {
-  switch (event.keyCode) {
-    case 40: monk.duckUp(); console.log('keyup - duck'); break;
 
+document.addEventListener('keyup', event => {   // The same as: document.keydown = event => {
+  if (event.isComposing || event.keyCode === 40) {
+    monk.duckUp()
+    console.log('keyup - duck')
+    return;
   }
+
 })

@@ -7,6 +7,9 @@ let frameCounter = 0
 
 
 
+
+
+
 class GameCanvas {
   constructor(width, height) {
     this.canvas = document.getElementById('canvas')
@@ -15,7 +18,6 @@ class GameCanvas {
     this.canvas.height = height;
     this.width = this.canvas.width;
     this.height = this.canvas.height;
-
   }
 
   clearBoard() {
@@ -61,6 +63,7 @@ class GameCanvas {
   // }
 
   draw() {
+    
     frameCounter++
     // console.log(frameCounter)
     gameCanvas.clearBoard()
@@ -80,6 +83,10 @@ class GameCanvas {
       backgroundImage.stopMoving()
       backgroundImage.drawStatue();
     }
+
+    // Update the player sprite animation
+    // monk.sprite.update(0.5);
+    // console.log(monk.sprite)
 
     // DRAW PLAYER
     monk.update()
