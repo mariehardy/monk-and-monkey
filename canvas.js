@@ -10,6 +10,39 @@ let frameCounter = 0
 
 
 
+
+// imgPlayer.onload = function () {
+      
+//   var totalNumberOfFrames = 10 // ten images in the image (see the url above)
+//   var imageFrameNumber = 0 // This is changed to make the sprite animate  
+//   var widthOfImage = imgPlayer.width; // find the width of the image
+//   var heightOfImage = imgPlayer.height; // find the height of the image
+//   var widthOfSingleImage = widthOfImage / totalNumberOfFrames; // The width of each image in the spirite
+
+//   setInterval(function () {
+//     context.clearRect(0, 0, 300, 300)
+
+//     imageFrameNumber++; // changes the sprite we look at
+//     imageFrameNumber = imageFrameNumber % totalNumberOfFrames; // Change this from 0 to 1 to 2 ... upto 9 and back to 0 again, then 1...
+
+//     context.drawImage(imgPlayer,
+//       imageFrameNumber * widthOfSingleImage, 0, // x and y - where in the sprite
+//       widthOfSingleImage, heightOfImage, // width and height
+//       30, 30, // x and y - where on the screen
+//       widthOfSingleImage, heightOfImage // width and height
+//     );
+//   }, 100)
+
+//   // console.log(x)
+
+// }
+
+
+
+
+
+
+
 class GameCanvas {
   constructor(width, height) {
     this.canvas = document.getElementById('canvas')
@@ -85,28 +118,23 @@ class GameCanvas {
     }
 
     // Update the player sprite animation
-    // monk.sprite.update(0.5);
+    // monk.sprite.update(20);
     // console.log(monk.sprite)
 
+
     // DRAW PLAYER
-    monk.update()
+    // monk.update()
+
+    monk.updateAnimatedPlayer()
+
+    // imgPlayer.onload()
+
+
 
 
     // DRAW OBSTACLES
 
-
-    // It gets ***HARDER*** over time by adding enemies using this
-    // equation: 1-.993^gameTime
-  //   if(Math.random() < 1 - Math.pow(.993, gameTime)) {
-  //     enemies.push({
-  //         pos: [canvas.width,
-  //               Math.random() * (canvas.height - 39)],
-  //         sprite: new Sprite('img/sprites.png', [0, 78], [80, 39],
-  //                            6, [0, 1, 2, 3, 2, 1])
-  //     });
-  // }
-
-    // Monkeys fall after each 2 second
+    // Monkeys fall every 2 second
     if (frameCounter % 120 === 0) {
       let randomPosX = Math.floor(Math.random() * 400)
       monkeyArr.push(new Monkey(randomPosX))
