@@ -360,7 +360,7 @@
       this.speedX = 0;
       this.speedY = 0;
       this.velocityX = 9;
-      this.velocityY = 2;     //9;
+      this.velocityY = 7;     //9;
       this.imageFrameNumber = 0;
     }
 
@@ -392,7 +392,7 @@
       // setInterval(function () {
       //   context.clearRect(0, 0, 300, 300)
 
-      this.imageFrameNumber++; // changes the sprite we look at
+      // this.imageFrameNumber++; // changes the sprite we look at
       this.imageFrameNumber = this.imageFrameNumber % totalNumberOfFrames; // Change this from 0 to 1 to 2 ... upto 9 and back to 0 again, then 1...
 
         context.drawImage(imgMonkey,
