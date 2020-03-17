@@ -157,15 +157,15 @@
 
 
   let img1 = new Image();
-  img1.src = 'https://orig15.deviantart.net/8bed/f/2015/058/a/8/smb1_background_by_steamerthesteamtrain-d8jq7ea.png';
+  img1.src = './img/monandmonkey_bg.jpg';
   let img2 = new Image();
-  img2.src = 'https://banner2.cleanpng.com/20180325/ute/kisspng-emoji-love-heart-sticker-emoticon-emoji-5ab86fdec2e6d0.1707378915220367027983.jpg';
+  img2.src = './img/monandmonkey_statue_bg.jpg';
 
 
   let backgroundImage = {
     x: 0,
     totalX: 0,
-    speed: -1,
+    speed: -2.2,
 
     move: function () {
       this.totalX += this.speed;
@@ -188,24 +188,27 @@
         context.drawImage(img2, this.x + canvas.width, 0);
       } else {
         context.drawImage(img2, this.x - img2.width, 0);
+        if (this.x===0){
+          context.drawImage(img2,0,0);
+        }
+        // this.stopMoving()
+        return
       }
+      // console.log('draw transition is happening')
     },
 
     stopMoving: function () {
       this.x = 0
     },
 
-    drawStatue: function () {
-      context.drawImage(img2, this.x, 0);
-    }
   }
 
 
 
   
   let imgPlayer = new Image();
-  imgPlayer.src = 'http://www.williammalone.com/articles/create-html5-canvas-javascript-sprite-animation/images/coin-sprite-animation-sprite-sheet.png';
-
+  // imgPlayer.src = 'http://www.williammalone.com/articles/create-html5-canvas-javascript-sprite-animation/images/coin-sprite-animation-sprite-sheet.png';
+  imgPlayer.src = './img/MONKK.png';
 
   // PLAYER
 
@@ -250,6 +253,7 @@
     moveRight: function () {
       if (this.x < (canvas.width - 50)) {
         this.x += 4;
+        this.updateAnimatedPlayer()
         // console.log('monk x is ' + this.x)
       }
     },
@@ -282,35 +286,59 @@
     //   let img = new Image();
     //     img.src = "https://banner2.cleanpng.com/20180325/ute/kisspng-emoji-love-heart-sticker-emoticon-emoji-5ab86fdec2e6d0.1707378915220367027983.jpg";
     //     context.drawImage(img, this.x, this.y, this.width, this.height);
-    // }
+    // },
 
+    imageFrameNumber: 0,
 
-
-
-    updateAnimatedPlayer: function () {
-      imgPlayer.onload = function () {
-
-      var totalNumberOfFrames = 10 // ten images in the image (see the url above)
-      var imageFrameNumber = 0 // This is changed to make the sprite animate  
+    updateStillPlayer: function () {
+      // imgPlayer.onload = function () {
+      let numberOfRows = 3;
+      var totalNumberOfFrames = 3;
       var widthOfImage = imgPlayer.width; // find the width of the image
-      var heightOfImage = imgPlayer.height; // find the height of the image
+      var heightOfImage = imgPlayer.height / numberOfRows; // find the height of the image
       var widthOfSingleImage = widthOfImage / totalNumberOfFrames; // The width of each image in the spirite
 
-      setInterval(function () {
-        context.clearRect(0, 0, 300, 300)
+      // setInterval(function () {
+      //   context.clearRect(0, 0, 300, 300)
 
-        imageFrameNumber++; // changes the sprite we look at
-        imageFrameNumber = imageFrameNumber % totalNumberOfFrames; // Change this from 0 to 1 to 2 ... upto 9 and back to 0 again, then 1...
+      // this.imageFrameNumber++; // changes the sprite we look at
+      // this.imageFrameNumber = this.imageFrameNumber % totalNumberOfFrames; // Change this from 0 to 1 to 2 ... upto 9 and back to 0 again, then 1...
 
         context.drawImage(imgPlayer,
-          imageFrameNumber * widthOfSingleImage, 0, // x and y - where in the sprite
+          0, 0, // x and y - where in the sprite
           widthOfSingleImage, heightOfImage, // width and height
           this.x, this.y, // x and y - where on the screen
           widthOfSingleImage, heightOfImage // width and height
         );
-      }, 100)
+      // }, 100)
 
-      }
+      // }
+    },
+
+    updateAnimatedPlayer: function () {
+      // imgPlayer.onload = function () {
+      let numberOfRows = 3;
+      var totalNumberOfFrames = 3;
+      var widthOfImage = imgPlayer.width; // find the width of the image
+      var heightOfImage = imgPlayer.height / numberOfRows; // find the height of the image
+      var widthOfSingleImage = widthOfImage / totalNumberOfFrames; // The width of each image in the spirite
+
+      // setInterval(function () {
+      //   context.clearRect(0, 0, 300, 300)
+
+      // imageFrameNumber++; // changes the sprite we look at
+      // console.log('imageFrameNumber ' + this.imageFrameNumber)
+      this.imageFrameNumber = this.imageFrameNumber % totalNumberOfFrames; // Change this from 0 to 1 to 2 ... upto 9 and back to 0 again, then 1...
+
+        context.drawImage(imgPlayer,
+          this.imageFrameNumber * widthOfSingleImage, 0, // x and y - where in the sprite
+          widthOfSingleImage, heightOfImage, // width and height
+          this.x, this.y, // x and y - where on the screen
+          widthOfSingleImage, heightOfImage // width and height
+        );
+      // }, 100)
+
+      // }
     }
   
 }
@@ -319,16 +347,21 @@
 
   // OBSTACLES
 
+  let imgMonkey = new Image();
+  // imgPlayer.src = 'http://www.williammalone.com/articles/create-html5-canvas-javascript-sprite-animation/images/coin-sprite-animation-sprite-sheet.png';
+  imgMonkey.src = "./img/monkey_sprite1.png";
+
   class Monkey {
     constructor(x) {
       this.x = x;
-      this.y = 0;
+      this.y = -300;
       this.width = 50;
-      this.height = 50;
+      this.height = imgMonkey.height;
       this.speedX = 0;
       this.speedY = 0;
       this.velocityX = 9;
-      this.velocityY = 9;
+      this.velocityY = 2;     //9;
+      this.imageFrameNumber = 0;
     }
 
     top() {
@@ -344,24 +377,57 @@
       return this.x + this.width
     }
 
-    update() {
-      let img = new Image();
-      // img.onload = function () {
-      img.src = "https://banner2.cleanpng.com/20180325/ute/kisspng-emoji-love-heart-sticker-emoticon-emoji-5ab86fdec2e6d0.1707378915220367027983.jpg";
-      context.drawImage(img, this.x, this.y, this.width, this.height);
-
-      // this.velocityY += gravity;
+    updateAnimatedMonkey() {
       this.y += this.velocityY;
-      if (this.y + this.velocityY > canvas.height - 60 || this.y + this.velocityY < 0) {
+      if (this.y + this.velocityY > canvas.height - 420) {
         this.velocityY *= -1;
       }
-      if (this.y === 0 || this.velocityY === -1) {
-        this.y = -100;
-      }
-      // if (this.x + this.velocityX > canvas.width || this.x + this.velocityX < 0) {
-      //   this.velocityX *= -1;
-      // }
+
+      // let imageFrameNumber = 0;
+      var totalNumberOfFrames = 6 // ten images in the image (see the url above)
+      var widthOfImage = imgMonkey.width; // find the width of the image
+      var heightOfImage = imgMonkey.height; // find the height of the image
+      var widthOfSingleImage = widthOfImage / totalNumberOfFrames; // The width of each image in the spirite
+
+      // setInterval(function () {
+      //   context.clearRect(0, 0, 300, 300)
+
+      this.imageFrameNumber++; // changes the sprite we look at
+      this.imageFrameNumber = this.imageFrameNumber % totalNumberOfFrames; // Change this from 0 to 1 to 2 ... upto 9 and back to 0 again, then 1...
+
+        context.drawImage(imgMonkey,
+          this.imageFrameNumber * widthOfSingleImage, 0, // x and y - where in the sprite
+          widthOfSingleImage, heightOfImage, // width and height
+          this.x, this.y, // x and y - where on the screen
+          widthOfSingleImage, heightOfImage // width and height
+        );
+
+
     }
+
+
+
+
+
+
+    // update() {
+    //   let img = new Image();
+    //   // img.onload = function () {
+    //   img.src = "./img/monkey_sprite1.png";
+    //   context.drawImage(img, this.x, this.y, this.width, this.height);
+
+    //   // this.velocityY += gravity;
+    //   this.y += this.velocityY;
+    //   if (this.y + this.velocityY > canvas.height - 60 || this.y + this.velocityY < 0) {
+    //     this.velocityY *= -1;
+    //   }
+    //   if (this.y === 0 || this.velocityY === -1) {
+    //     this.y = -100;
+    //   }
+    //   // if (this.x + this.velocityX > canvas.width || this.x + this.velocityX < 0) {
+    //   //   this.velocityX *= -1;
+    //   // }
+    // }
 
     monkeyWins() {
       // laughing monkey sound

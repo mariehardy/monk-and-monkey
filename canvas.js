@@ -107,15 +107,15 @@ class GameCanvas {
     // console.log(-(canvas.width * 3))
     backgroundImage.move();
 
-    if (backgroundImage.totalX > -(canvas.width * 0)) {
+    if (backgroundImage.totalX > -(canvas.width * 1)) {
       backgroundImage.drawLandscape();
-    } else if ((backgroundImage.totalX > -(canvas.width * 1))) {
+    } else {
       backgroundImage.drawTransition();
     } 
-    else {
-      backgroundImage.stopMoving()
-      backgroundImage.drawStatue();
-    }
+    // else {
+    //   backgroundImage.stopMoving()
+    //   backgroundImage.drawStatue();
+    // }
 
     // Update the player sprite animation
     // monk.sprite.update(20);
@@ -125,7 +125,12 @@ class GameCanvas {
     // DRAW PLAYER
     // monk.update()
 
-    monk.updateAnimatedPlayer()
+
+    if (frameCounter % 15 === 0) {
+    monk.imageFrameNumber++; // changes the sprite we look at
+    }
+
+    monk.updateStillPlayer()
 
     // imgPlayer.onload()
 
@@ -148,13 +153,14 @@ class GameCanvas {
       // PUT ALL THIS IN a CHECKCOLLISION FUNCTION
       if (monk.crashWith(monkey)) {
         // console.log('monk and monkey have crashed')
-        monkey.monkeyWins()
+        // monkey.monkeyWins()
         // console.log(monkey.y)
         gameCanvas.gameOver() //MAKE GAME OVER
-        clearTimeout(gameCanvas.draw)
+        // clearTimeout(gameCanvas.draw)
         return
       }
-      monkey.update()
+      monkey.updateAnimatedMonkey()
+      // monkey.update()
     })
 
     if (gameRunning) {
