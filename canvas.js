@@ -43,6 +43,9 @@ let frameCounter = 0
 
 
 
+
+
+
 class GameCanvas {
   constructor(width, height) {
     this.canvas = document.getElementById('canvas')
@@ -61,6 +64,12 @@ class GameCanvas {
     this.clearBoard()
     this.draw()
   }
+
+  // winner() {
+  //   this.context.fillStyle = 'red';
+  //   this.context.font = "30px Arial";
+  //   this.context.fillText("YOU HAVE REACHED NIRVANA", 200, 200)
+  // }
 
   gameOver() {
     // frameCounter = 0
@@ -123,16 +132,18 @@ class GameCanvas {
 
 
     // DRAW PLAYER
-    // monk.update()
+    monk.update()
 
 
-    if (frameCounter % 15 === 0) {
-    monk.imageFrameNumber++; // changes the sprite we look at
-    }
+    // if (frameCounter % 15 === 0) {
+    // monk.imageFrameNumber++; // changes the sprite we look at
+    // }
 
-    monk.updateStillPlayer()
+    // monk.updateStillPlayer()
 
     // imgPlayer.onload()
+
+    // context.drawImage(monkAlfonsoSprite, 30, 30, 60, 60);
 
 
 
@@ -143,7 +154,6 @@ class GameCanvas {
     if (frameCounter % 120 === 0) {
       let randomPosX = Math.floor(Math.random() * 400)
       monkeyArr.push(new Monkey(randomPosX))
-      // monkeyArr.push(new Monkey(randomPosX)) 
     }
     console.log(gameRunning)
 
@@ -152,16 +162,14 @@ class GameCanvas {
 
       // PUT ALL THIS IN a CHECKCOLLISION FUNCTION
       if (monk.crashWith(monkey)) {
-        // console.log('monk and monkey have crashed')
-        // monkey.monkeyWins()
-        // console.log(monkey.y)
         gameCanvas.gameOver() //MAKE GAME OVER
-        // clearTimeout(gameCanvas.draw)
         return
       }
       monkey.updateAnimatedMonkey()
-      // monkey.update()
     })
+
+
+
 
     if (gameRunning) {
       window.requestAnimationFrame(gameCanvas.draw)
