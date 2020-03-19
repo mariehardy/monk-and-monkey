@@ -73,9 +73,9 @@
 
 
   let img1 = new Image();
-  img1.src = './img/monandmonkey_bg.jpg';
+  img1.src = './img/monandmonkey_bg_ground.jpg';
   let img2 = new Image();
-  img2.src = './img/monandmonkey_statue_bg.jpg';
+  img2.src = './img/monandmonkey_bg_keanu2.jpg';
 
 
 
@@ -91,7 +91,7 @@
     },
 
     drawLandscape: function () {
-      
+
       context.drawImage(img1, this.x, 0);
       if (this.speed < 0) {
         context.drawImage(img1, this.x + canvas.width, 0);
@@ -108,7 +108,7 @@
       } else {
         context.drawImage(img2, this.x + canvas.width, 0);
         context.drawImage(img2, this.x - img2.width, 0);
-        this.speed = 0 
+        this.speed = 0
 
 
 
@@ -117,18 +117,18 @@
         let myVar = setInterval(myTimer, 1500);
 
         // statue: function () {
-        
-          function myTimer() {
-        
-            context.fillStyle = 'blue';
-            context.font = "30px Arial";
-            context.fillText("SHOW RESPECT, BHIKKHU! \n" +
+
+        function myTimer() {
+
+          context.fillStyle = 'blue';
+          context.font = "30px Arial";
+          context.fillText("SHOW RESPECT, BHIKKHU! \n" +
             "PRESS ARROW DOWN", 200, 200);
-          }
-          
-          
-          myTimer()
-          clearInterval(myVar);
+        }
+
+
+        myTimer()
+        clearInterval(myVar);
 
 
 
@@ -146,24 +146,24 @@
 
 
 
-// SPRITE ON KEYPRESS -- SEE REPL.IT
-let arrImg1=["./img/monksprite-cutter/tile000.png","./img/monksprite-cutter/tile001.png","./img/monksprite-cutter/tile002.png"];
-let arrImg2=["./img/monksprite-cutter/tile003.png","./img/monksprite-cutter/tile004.png","./img/monksprite-cutter/tile005.png"];
-let arrImg3=["./img/monksprite-cutter/tile006.png","./img/monksprite-cutter/tile007.png","./img/monksprite-cutter/tile008.png"];
+  // SPRITE ON KEYPRESS -- SEE REPL.IT
+  let arrImg1 = ["./img/monksprite-cutter/tile000.png", "./img/monksprite-cutter/tile001.png", "./img/monksprite-cutter/tile002.png"];
+  let arrImg2 = ["./img/monksprite-cutter/tile003.png", "./img/monksprite-cutter/tile004.png", "./img/monksprite-cutter/tile005.png"];
+  let arrImg3 = ["./img/monksprite-cutter/tile006.png", "./img/monksprite-cutter/tile007.png", "./img/monksprite-cutter/tile008.png"];
 
-let indexMonkAlfonsoSprite=0;
-let monkAlfonsoSprite=new Image();
+  let indexMonkAlfonsoSprite = 0;
+  let monkAlfonsoSprite = new Image();
 
   // PLAYER
 
   let monk = {
 
     x: 40,
-    y: 350,
+    y: 363,
     // pos: [0, 0],
     // sprite: new Sprite('img/sprites.png', [0, 0], [39, 39], 16, [0, 1]),
-    width: 60,
-    height: 60,
+    width: 50,
+    height: 50,
     stateLookRight: true,
     stateLookLeft: false,
     stateGiveOffering: false,
@@ -195,7 +195,7 @@ let monkAlfonsoSprite=new Image();
         this.stateLookLeft = true
         this.stateLookRight = false;
         this.stateGiveOffering = false;
-        indexMonkAlfonsoSprite++; 
+        indexMonkAlfonsoSprite++;
         this.x -= 2;
       }
 
@@ -205,21 +205,21 @@ let monkAlfonsoSprite=new Image();
         this.stateLookRight = true
         this.stateLookLeft = false
         this.stateGiveOffering = false;
-        indexMonkAlfonsoSprite++; 
+        indexMonkAlfonsoSprite++;
         this.x += 4;
       }
     },
 
-    // duck: function () {
-    //   if (this.height = 30) {
-    //     this.y += this.height / 2;
-    //     this.height = this.height / 2;
-    //   }
-    // },
+    duck: function () {
+      if (this.height = 50) {
+        this.height = 25;
+        this.y += 10;
+      }
+    },
 
     // duckUp: function () {
     //   // if (this.height = this.height / 2) {
-    //   this.height = 30
+    //   this.height = 50
     //   this.y -= this.height / 2;
     //   // }
     // },
@@ -238,8 +238,8 @@ let monkAlfonsoSprite=new Image();
         context.font = "30px Arial";
         context.fillText("YOU HAVE REACHED NIRVANA", 200, 200)
         console.log('inside the statue area ' + this.x)
-      return
-      // this.gainKarmaPoints(100)
+        return
+        // this.gainKarmaPoints(100)
       } else {
         console.log('outside the statue area ' + this.x)
       }
@@ -249,28 +249,28 @@ let monkAlfonsoSprite=new Image();
     //   this.karmaPoint += num
     // },
 
-    update: function() {   // static player image
+    update: function () { // static player image
 
       if (this.stateLookLeft) {
         console.log("not stateLookRight " + this.stateLookRight)
-        monkAlfonsoSprite.src=arrImg2[indexMonkAlfonsoSprite%arrImg2.length];
+        monkAlfonsoSprite.src = arrImg2[indexMonkAlfonsoSprite % arrImg2.length];
         context.drawImage(monkAlfonsoSprite, this.x, this.y, this.width, this.height);
-      } 
-      
-      if (this.stateLookRight){
-      monkAlfonsoSprite.src=arrImg1[indexMonkAlfonsoSprite%arrImg1.length];
-      context.drawImage(monkAlfonsoSprite, this.x, this.y, this.width, this.height);
-      console.log("stateLookRight " + this.stateLookRight)
+      }
+
+      if (this.stateLookRight) {
+        monkAlfonsoSprite.src = arrImg1[indexMonkAlfonsoSprite % arrImg1.length];
+        context.drawImage(monkAlfonsoSprite, this.x, this.y, this.width, this.height);
+        console.log("stateLookRight " + this.stateLookRight)
       }
 
       if (this.stateGiveOffering) {
         console.log(indexMonkAlfonsoSprite)
 
         if (frameCounter % 10 === 0 && indexMonkAlfonsoSprite < 2) {
-          indexMonkAlfonsoSprite++; 
+          indexMonkAlfonsoSprite++;
         }
 
-        monkAlfonsoSprite.src=arrImg3[indexMonkAlfonsoSprite];
+        monkAlfonsoSprite.src = arrImg3[indexMonkAlfonsoSprite];
         context.drawImage(monkAlfonsoSprite, this.x, this.y, this.width, this.height);
         console.log("stateGiveOffering " + this.stateGiveOffering)
       }
@@ -329,8 +329,8 @@ let monkAlfonsoSprite=new Image();
 
     //   // }
     // }
-  
-}
+
+  }
 
 
 
@@ -349,7 +349,7 @@ let monkAlfonsoSprite=new Image();
       this.speedX = 0;
       this.speedY = 0;
       this.velocityX = 9;
-      this.velocityY = 7;     //9;
+      this.velocityY = 7; //9;
       this.imageFrameNumber = 0;
     }
 
@@ -367,6 +367,7 @@ let monkAlfonsoSprite=new Image();
     }
 
     updateAnimatedMonkey() {
+      playAudio(soundMonkey)
       this.y += this.velocityY;
       if (this.y + this.velocityY > canvas.height - 420) {
         this.velocityY *= -1;
@@ -384,12 +385,12 @@ let monkAlfonsoSprite=new Image();
       // this.imageFrameNumber++; // changes the sprite we look at
       this.imageFrameNumber = this.imageFrameNumber % totalNumberOfFrames; // Change this from 0 to 1 to 2 ... upto 9 and back to 0 again, then 1...
 
-        context.drawImage(imgMonkey,
-          this.imageFrameNumber * widthOfSingleImage, 0, // x and y - where in the sprite
-          widthOfSingleImage, heightOfImage, // width and height
-          this.x, this.y, // x and y - where on the screen
-          widthOfSingleImage, heightOfImage // width and height
-        );
+      context.drawImage(imgMonkey,
+        this.imageFrameNumber * widthOfSingleImage, 0, // x and y - where in the sprite
+        widthOfSingleImage, heightOfImage, // width and height
+        this.x, this.y, // x and y - where on the screen
+        widthOfSingleImage, heightOfImage // width and height
+      );
 
 
     }
@@ -430,5 +431,31 @@ let monkAlfonsoSprite=new Image();
       context.fillRect(this.x + 5, this.y + 5, 10, 10);
       this.y = -100
     }
+
+  }
+
+
+  //AUDIO
+
+  let hasPlayed = false;
+
+  let soundMonkey = new Audio("./sound/SQMonkey.mp3");
+  let soundMantra = new Audio("./sound/falsalama__om-gate-gate-paragate-parasamgate-bodhi-soha.wav");
+  let soundForest = new Audio("./sound/skipjack2001__rainforest.mp3");
+
+
+  function playAudio(sound) {
+
+    sound.play();
+
+    // if (!hasPlayed) {
+    //   sound.play();
+    //   hasPlayed = true;
+    // }
+
+    // if(!sound.isPlaying)
+    //  {
+    //   sound.play();
+    //  }
 
   }

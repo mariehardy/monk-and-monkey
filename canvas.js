@@ -133,6 +133,8 @@ class GameCanvas {
 
     // DRAW PLAYER
     monk.update()
+    playAudio(soundMantra)
+    playAudio(soundForest)
 
 
     // if (frameCounter % 15 === 0) {

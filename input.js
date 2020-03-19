@@ -20,6 +20,7 @@ document.addEventListener('keydown', event => {   // The same as: document.keydo
     case 39: fired = false; monk.moveRight(); console.log('key right'); break;
     case 38: fired = false; monk.stateLookRight = true; monk.stateGiveOffering = false; console.log('key up'); break;
     case 40: if(!fired) {fired = true; indexMonkAlfonsoSprite=0;monk.giveOffering(); console.log('key down');} break;
+    // case 40: if(!fired) {fired = true; monk.duck(); console.log('key down');} break;
   }
 })
 
