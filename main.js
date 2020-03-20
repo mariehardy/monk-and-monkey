@@ -17,7 +17,7 @@ img3.src = './img/monandmonkey_bg_KEANU_nirvana.jpg';
 let backgroundImage = {
   x: 0,
   totalX: 0,
-  speed: -5.3,
+  speed: -0.3,
 
   move: function () {
     this.totalX += this.speed;
@@ -51,36 +51,39 @@ let backgroundImage = {
       this.speed = 0
 
 
+      $message.style.visibility = 'visible';
+      $message.innerText = "BOW DOWN TO THE BUDDHA KEANU REEVES. COME CLOSER & PRESS ARROW DOWN."
+
       // myVar = setTimeout(function(){ 
 
-      context.fillStyle = 'red';
-      context.font = "28px courier";
+    //   context.fillStyle = 'red';
+    //   context.font = "28px courier";
 
-      var txt = 'BOW DOWN TO THE BUDDHA KEANU REEVES\n  (COME CLOSER & PRESS ARROW DOWN)';
-      var x = 88;
-      var y = 62;
-      var lineheight = 35;
-      var lines = txt.split('\n');
+    //   var txt = 'BOW DOWN TO THE BUDDHA KEANU REEVES\n  (COME CLOSER & PRESS ARROW DOWN)';
+    //   var x = 88;
+    //   var y = 62;
+    //   var lineheight = 35;
+    //   var lines = txt.split('\n');
 
-      for (var i = 0; i < lines.length; i++) {
-        context.fillText(lines[i], x, y + (i * lineheight));
-      }
+    //   for (var i = 0; i < lines.length; i++) {
+    //     context.fillText(lines[i], x, y + (i * lineheight));
+    //   }
 
 
-      context.fillStyle = 'turquoise';
-      context.font = "28px courier";
+    //   context.fillStyle = 'turquoise';
+    //   context.font = "28px courier";
 
-      var txt = 'BOW DOWN TO THE BUDDHA KEANU REEVES\n  (COME CLOSER & PRESS ARROW DOWN)';
-      var x = 92;
-      var y = 62;
-      var lineheight = 35;
-      var lines = txt.split('\n');
+    //   var txt = 'BOW DOWN TO THE BUDDHA KEANU REEVES\n  (COME CLOSER & PRESS ARROW DOWN)';
+    //   var x = 92;
+    //   var y = 62;
+    //   var lineheight = 35;
+    //   var lines = txt.split('\n');
 
-      for (var i = 0; i < lines.length; i++) {
-        context.fillText(lines[i], x, y + (i * lineheight));
-      }
+    //   for (var i = 0; i < lines.length; i++) {
+    //     context.fillText(lines[i], x, y + (i * lineheight));
+    //   }
 
-      return
+    //   return
     }
   }
 
@@ -108,8 +111,6 @@ let monk = {
 
   x: 40,
   y: 363,
-  // pos: [0, 0],
-  // sprite: new Sprite('img/sprites.png', [0, 0], [39, 39], 16, [0, 1]),
   width: 50,
   height: 50,
   stateLookRight: true,
@@ -155,16 +156,16 @@ let monk = {
       this.stateLookLeft = false
       this.stateGiveOffering = false;
       indexMonkAlfonsoSprite++;
-      this.x += 14; //4;
+      this.x += 4; 
     }
   },
 
-  duck: function () {
-    if (this.height = 50) {
-      this.height = 25;
-      this.y += 10;
-    }
-  },
+  // duck: function () {
+  //   if (this.height = 50) {
+  //     this.height = 25;
+  //     this.y += 10;
+  //   }
+  // },
 
   // duckUp: function () {
   //   // if (this.height = this.height / 2) {
@@ -313,12 +314,12 @@ class Monkey {
   constructor(x) {
     this.x = x;
     this.y = -350;
-    this.width = 100;
+    this.width = 103;
     this.height = imgMonkey.height - 20;
     this.speedX = 0;
     this.speedY = 0;
     this.velocityX = 9;
-    this.velocityY = 7; //9;
+    this.velocityY = 7; 
     this.imageFrameNumber = 0;
   }
 

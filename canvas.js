@@ -137,7 +137,7 @@ class GameCanvas {
     // Monkeys fall every 2 second
     if (frameCounter % 120 === 0) {
       playAudio(soundMonkey)
-      let randomPosX = Math.floor(Math.random() * 400)
+      let randomPosX = Math.floor(Math.random() * 600)
       monkeyArr.push(new Monkey(randomPosX))
     }
     // console.log(gameRunning)
