@@ -65,20 +65,30 @@ class GameCanvas {
     this.draw()
   }
 
-  // winner() {
-  //   this.context.fillStyle = 'red';
-  //   this.context.font = "30px Arial";
-  //   this.context.fillText("YOU HAVE REACHED NIRVANA", 200, 200)
-  // }
+  nirvana() {
+    playAudio(soundsLikeTeenSpirit)
+    // this.clearBoard()
+    $startBtn.style.visibility = 'visible';
+    $startBtn.innerText = "REINCARNATE ANYWAYS"
+    $message.style.visibility = 'visible';
+    $message.innerText = "CONGRATS! YOU HAVE REACHED NIRVANA."
+  }
 
   gameOver() {
     // frameCounter = 0
     // gameCanvas.clearBoard() 
-    gameRunning = false
-    console.log('gameRunning is ' + gameRunning)
-    this.context.fillStyle = 'blue';
-    this.context.font = "30px Arial";
-    this.context.fillText("GAME OVER", 200, 200)
+    // gameRunning = false
+
+    // DISABLE KEY EVENT!!!
+
+    backgroundImage.speed = 0
+    playAudio(soundGameOver)
+    stopAudio(soundMantra)
+
+    $startBtn.style.visibility = 'visible';
+    $startBtn.innerText = "REINCARNATE"
+    $message.style.visibility = 'visible';
+    $message.innerText = "MAY YOU BE HAPPY."    
   }
 
   // Reset game to original state
@@ -95,14 +105,6 @@ class GameCanvas {
 //   player.pos = [50, canvas.height / 2];
 // };
 
-  // pauseGame() {
-  //   if (!gameRunning) {
-  //   gameCanvas.clearBoard() 
-  //   this.context.fillStyle = 'blue';
-  //   this.context.fillRect(50, 50, 50, 50);
-  //   frameCounter = 0
-  //   }
-  // }
 
   draw() {
     
@@ -110,43 +112,23 @@ class GameCanvas {
     // console.log(frameCounter)
     gameCanvas.clearBoard()
 
+
+    playAudio(soundMantra)
+    playAudio(soundForest)
+
     // BACKGROUND
-    // console.log("here")
-    // console.log(backgroundImage.totalX)
-    // console.log(-(canvas.width * 3))
+    
     backgroundImage.move();
 
-    if (backgroundImage.totalX > -(canvas.width * 1)) {
+    if (backgroundImage.totalX > -(canvas.width * 0)) {
       backgroundImage.drawLandscape();
     } else {
       backgroundImage.drawTransition();
     } 
-    // else {
-    //   backgroundImage.stopMoving()
-    //   backgroundImage.drawStatue();
-    // }
-
-    // Update the player sprite animation
-    // monk.sprite.update(20);
-    // console.log(monk.sprite)
 
 
     // DRAW PLAYER
     monk.update()
-    playAudio(soundMantra)
-    playAudio(soundForest)
-
-
-    // if (frameCounter % 15 === 0) {
-    // monk.imageFrameNumber++; // changes the sprite we look at
-    // }
-
-    // monk.updateStillPlayer()
-
-    // imgPlayer.onload()
-
-    // context.drawImage(monkAlfonsoSprite, 30, 30, 60, 60);
-
 
 
 
@@ -154,24 +136,35 @@ class GameCanvas {
 
     // Monkeys fall every 2 second
     if (frameCounter % 120 === 0) {
+      playAudio(soundMonkey)
       let randomPosX = Math.floor(Math.random() * 400)
       monkeyArr.push(new Monkey(randomPosX))
     }
-    console.log(gameRunning)
+    // console.log(gameRunning)
 
     // Check collision
     monkeyArr.forEach((monkey) => {
 
       // PUT ALL THIS IN a CHECKCOLLISION FUNCTION
       if (monk.crashWith(monkey)) {
+        monk.stateFallOver = true
+
         gameCanvas.gameOver() //MAKE GAME OVER
+        monkey.updateWinningMonkey()
+
+        setTimeout(function(){ gameRunning=false; }, 1000);
+
+        
         return
       }
       monkey.updateAnimatedMonkey()
     })
 
+    if (monk.x > 434 && monk.stateGiveOffering) {
+      gameCanvas.nirvana()
+      setTimeout(function(){ gameRunning=false; }, 1000);
 
-
+    }
 
     if (gameRunning) {
       window.requestAnimationFrame(gameCanvas.draw)

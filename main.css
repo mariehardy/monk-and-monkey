@@ -1,0 +1,40 @@
+body {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: large;
+    color: maroon;
+    text-transform: uppercase;
+}
+main {
+    margin: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#start-button{
+    order: 0;
+
+    /* z-index: 100; */
+    margin-bottom: 20px;
+    background-color: turquoise;
+    border: solid 3px tomato;
+    /* border-radius: 12px; */
+    color: tomato;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 700;
+    font-size: large;
+    text-transform: uppercase;
+    /* padding-top: 60; */
+    height: 80px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+#message {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+    padding-left: 25%;
+    padding-right: 25%;
+}

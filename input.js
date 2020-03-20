@@ -1,9 +1,18 @@
+let $startBtn = document.getElementById('start-button')
+let $message = document.getElementById('message')
+
 // INTERACTIONS USER / SCREEN
 
+$startBtn.innerText = "Begin Pilgrimage"
+$message.innerText = "Monk, you must bring this modest offering to Most Venerable Buddha Keanu Reeves in order to pay respect. But watch out for the monkeys..."
+
 window.onload = () => {
-    document.getElementById('start-button').onclick = () => {
+  $startBtn.onclick = () => {
+      
       gameCanvas = new GameCanvas(800, 450);
       gameCanvas.createBoard()
+      $startBtn.style.visibility = 'hidden';
+      $message.style.visibility = 'hidden';
     };
   }
   
