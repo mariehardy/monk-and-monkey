@@ -12,7 +12,7 @@ let frameCounter = 0
 
 
 // imgPlayer.onload = function () {
-      
+
 //   var totalNumberOfFrames = 10 // ten images in the image (see the url above)
 //   var imageFrameNumber = 0 // This is changed to make the sprite animate  
 //   var widthOfImage = imgPlayer.width; // find the width of the image
@@ -68,10 +68,10 @@ class GameCanvas {
   nirvana() {
     playAudio(soundsLikeTeenSpirit)
     // this.clearBoard()
-    $startBtn.style.visibility = 'visible';
-    $startBtn.innerText = "REINCARNATE ANYWAYS"
-    $message.style.visibility = 'visible';
-    $message.innerText = "CONGRATS! YOU HAVE REACHED NIRVANA."
+    $restartBtn.style.visibility = 'visible';
+    $restartBtn.innerText = "REINCARNATE ANYWAYS"
+    $messageOverlay.style.visibility = 'visible';
+    $messageOverlay.innerText = "CONGRATS! YOU HAVE REACHED NIRVANA."
   }
 
   gameOver() {
@@ -83,31 +83,37 @@ class GameCanvas {
 
     backgroundImage.speed = 0
     playAudio(soundGameOver)
+    playAudio(soundPain)
     stopAudio(soundMantra)
 
-    $startBtn.style.visibility = 'visible';
-    $startBtn.innerText = "REINCARNATE"
-    $message.style.visibility = 'visible';
-    $message.innerText = "MAY YOU BE HAPPY."    
+    $restartBtn.style.visibility = 'visible';
+    $restartBtn.innerText = "REINCARNATE"
+    $messageOverlay.style.visibility = 'visible';
+    $messageOverlay.innerText = "MAY YOU BE HAPPY."
   }
 
   // Reset game to original state
-// function reset() {
-//   document.getElementById('game-over').style.display = 'none';
-//   document.getElementById('game-over-overlay').style.display = 'none';
-//   isGameOver = false;
-//   gameTime = 0;
-//   score = 0;
 
-//   enemies = [];
-//   bullets = [];
-
-//   player.pos = [50, canvas.height / 2];
-// };
+  reset() {
+    gameRunning = true;
+    monk.x = 40;
+    monk.y =  363;
+    monk.stateLookRight = true;
+    monk.stateLookLeft = false;
+    monk.stateGiveOffering = false;
+    monk.stateFallOver = false;
+    backgroundImage.x = 0;
+    backgroundImage.totalX = 0;
+    backgroundImage.speed = -0.3;
+    stopAudio(soundsLikeTeenSpirit)
+    stopAudio(soundPain)
+    stopAudio(soundGameOver)
+    $message.style.visibility = 'hidden';
+  }
 
 
   draw() {
-    
+
     frameCounter++
     // console.log(frameCounter)
     gameCanvas.clearBoard()
@@ -117,14 +123,14 @@ class GameCanvas {
     playAudio(soundForest)
 
     // BACKGROUND
-    
+
     backgroundImage.move();
 
     if (backgroundImage.totalX > -(canvas.width * 0)) {
       backgroundImage.drawLandscape();
     } else {
       backgroundImage.drawTransition();
-    } 
+    }
 
 
     // DRAW PLAYER
@@ -152,9 +158,11 @@ class GameCanvas {
         gameCanvas.gameOver() //MAKE GAME OVER
         monkey.updateWinningMonkey()
 
-        setTimeout(function(){ gameRunning=false; }, 1000);
+        setTimeout(function () {
+          gameRunning = false;
+        }, 1000);
 
-        
+
         return
       }
       monkey.updateAnimatedMonkey()
@@ -162,7 +170,9 @@ class GameCanvas {
 
     if (monk.x > 434 && monk.stateGiveOffering) {
       gameCanvas.nirvana()
-      setTimeout(function(){ gameRunning=false; }, 1000);
+      setTimeout(function () {
+        gameRunning = false;
+      }, 1000);
 
     }
 

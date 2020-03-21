@@ -119,7 +119,7 @@ let monk = {
   stateFallOver: false,
   speedX: 0,
   speedY: 0,
-  karmaPoint: 60,
+  // karmaPoint: 60,
   top: function () {
     return this.y
   },
@@ -438,6 +438,8 @@ let soundMantra = new Audio("./sound/falsalama__om-gate-gate-paragate-parasamgat
 let soundForest = new Audio("./sound/skipjack2001__rainforest.mp3");
 let soundGameOver = new Audio("./sound/spidermonkey.mp3");
 let soundsLikeTeenSpirit = new Audio("./sound/SmellsLikeTeenSpirit.mp3");
+let soundPain = new Audio("./sound/pain.mp3");
+
 
 function playAudio(sound) {
   sound.play();

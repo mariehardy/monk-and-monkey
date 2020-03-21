@@ -1,7 +1,10 @@
 let $startBtn = document.getElementById('start-button')
 let $message = document.getElementById('message')
 let $main = document.getElementsByTagName('main')[0]
-
+let $restartBtn = document.getElementById('restart-button')
+$restartBtn.style.visibility = 'hidden';
+let $messageOverlay = document.getElementById('messageOverlay')
+$messageOverlay.style.visibility = 'hidden';
 
 
 function titleScreen() {
@@ -45,34 +48,60 @@ titleScreen()
 
 
 window.onload = () => {
-
   $startBtn.onclick = () => {
-      document.getElementById("title").remove()
-      gameCanvas = new GameCanvas(800, 450);
-      gameCanvas.createBoard()
-      $startBtn.style.visibility = 'hidden';
-      $message.style.visibility = 'hidden';
-    };
-  }
-  
+    document.getElementById("title").remove()
+    gameCanvas = new GameCanvas(800, 450);
+    gameCanvas.createBoard()
+    $startBtn.style.visibility = 'hidden';
+    $message.style.visibility = 'hidden';
+  };
+  $restartBtn.onclick = () => {
+    gameCanvas.reset()
+    gameCanvas = new GameCanvas(800, 450);
+    gameCanvas.createBoard()
+    $restartBtn.style.visibility = 'hidden';
+    $messageOverlay.style.visibility = 'hidden';
+  };
+}
 
-  $startBtn.innerText = "Begin Pilgrimage"
-  $message.innerText = "Monk, you must bring this modest offering to Most Venerable Buddha Keanu Reeves in order to pay respect. But watch out for the monkeys..."
-  
-  
+
+$startBtn.innerText = "Begin Pilgrimage"
+$message.innerText = "Monk, you must bring this modest offering to Most Venerable Buddha Keanu Reeves in order to pay respect. But watch out for the monkeys..."
+
+
 
 
 
 var fired = false;
 
 // React to user pressing a key
-document.addEventListener('keydown', event => {   // The same as: document.keydown = event => {
+document.addEventListener('keydown', event => { // The same as: document.keydown = event => {
   switch (event.keyCode) {
-    case 37: fired = false; monk.moveLeft();  console.log('key left'); break;
-    case 39: fired = false; monk.moveRight(); console.log('key right'); break;
-    case 38: fired = false; monk.stateLookRight = true; monk.stateGiveOffering = false; console.log('key up'); break;
-    case 40: if(!fired) {fired = true; indexMonkAlfonsoSprite=0;monk.giveOffering(); console.log('key down');} break;
-    // case 40: if(!fired) {fired = true; monk.duck(); console.log('key down');} break;
+    case 37:
+      fired = false;
+      monk.moveLeft();
+      // console.log('key left');
+      break;
+    case 39:
+      fired = false;
+      monk.moveRight();
+      // console.log('key right');
+      break;
+    case 38:
+      fired = false;
+      monk.stateLookRight = true;
+      monk.stateGiveOffering = false;
+      // console.log('key up');
+      break;
+    case 40:
+      if (!fired) {
+        fired = true;
+        indexMonkAlfonsoSprite = 0;
+        monk.giveOffering();
+        // console.log('key down');
+      }
+      break;
+      // case 40: if(!fired) {fired = true; monk.duck(); console.log('key down');} break;
   }
 })
 

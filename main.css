@@ -15,10 +15,9 @@ main {
 
 #message {
     /* order: 1; */
-
     position: absolute;
     z-index: 2;
-    top: 590px;
+    top: 540px;
     margin-top: 20px;
     margin-bottom: 20px;
     text-align: center;
@@ -28,22 +27,17 @@ main {
 
 #start-button{
     /* order: 2; */
-
     z-index: 2;
-    top: 520px;
-
+    top: 465px;
     position: absolute;
-
     margin-bottom: 20px;
     background-color: turquoise;
     border: solid 3px tomato;
-    /* border-radius: 12px; */
     color: tomato;
     font-family: 'Courier New', Courier, monospace;
     font-weight: 700;
     font-size: large;
     text-transform: uppercase;
-    /* padding-top: 60; */
     height: 65px;
     padding-left: 25px;
     padding-right: 25px;
@@ -57,4 +51,37 @@ main {
 #canvas {
     position: relative;
     top: 60px;
+}
+
+#restart-button{
+    /* order: 2; */
+    z-index: 2;
+    top: 320px;
+    position: absolute;
+    margin-bottom: 20px;
+    background-color: turquoise;
+    border: solid 3px tomato;
+    color: tomato;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 700;
+    font-size: large;
+    text-transform: uppercase;
+    height: 65px;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+#messageOverlay {
+    /* order: 1; */
+    position: absolute;
+    z-index: 2;
+    top: 250px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+    padding-left: 25%;
+    padding-right: 25%;
+    font-size: larger;
+    background-color: tomato;
+    font-weight: 700;
+    color: turquoise;
 }
