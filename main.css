@@ -1,8 +1,9 @@
 body {
     font-family: 'Courier New', Courier, monospace;
     font-size: large;
-    color: maroon;
+    color: turquoise;
     text-transform: uppercase;
+    background-color: black;
 }
 main {
     margin: 30px;
@@ -12,10 +13,27 @@ main {
     align-items: center;
 }
 
-#start-button{
-    order: 0;
+#message {
+    /* order: 1; */
 
-    /* z-index: 100; */
+    position: absolute;
+    z-index: 2;
+    top: 590px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+    padding-left: 25%;
+    padding-right: 25%;
+}
+
+#start-button{
+    /* order: 2; */
+
+    z-index: 2;
+    top: 520px;
+
+    position: absolute;
+
     margin-bottom: 20px;
     background-color: turquoise;
     border: solid 3px tomato;
@@ -26,15 +44,17 @@ main {
     font-size: large;
     text-transform: uppercase;
     /* padding-top: 60; */
-    height: 80px;
-    padding-left: 30px;
-    padding-right: 30px;
+    height: 65px;
+    padding-left: 25px;
+    padding-right: 25px;
 }
 
-#message {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    text-align: center;
-    padding-left: 25%;
-    padding-right: 25%;
+#title {
+    position: absolute;
+    top: 60px;
+}
+
+#canvas {
+    position: relative;
+    top: 60px;
 }

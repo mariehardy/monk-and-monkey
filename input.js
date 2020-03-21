@@ -3,26 +3,49 @@ let $message = document.getElementById('message')
 let $main = document.getElementsByTagName('main')[0]
 
 
-// INTERACTIONS USER / SCREEN
 
-$startBtn.innerText = "Begin Pilgrimage"
-$message.innerText = "Monk, you must bring this modest offering to Most Venerable Buddha Keanu Reeves in order to pay respect. But watch out for the monkeys..."
-
-// canvas.createElement("monandmonkey_title.jpg");
-
-function myFunction() {
+function titleScreen() {
   var x = document.createElement("IMG");
   x.setAttribute("src", "./img/monandmonkey_title.jpg");
   x.setAttribute("id", "title")
   // x.setAttribute("width", "304");
   // x.setAttribute("height", "228");
   x.setAttribute("alt", "Monk and Monkey");
+
   $main.appendChild(x);
 }
+titleScreen()
 
-myFunction()
+
+
+
+// function addLoadEvent(func) {
+//   var oldonload = window.onload;
+//   if (typeof window.onload != 'function') {
+//     window.onload = func;
+//   } else {
+//     window.onload = function() {
+//       if (oldonload) {
+//         oldonload();
+//       }
+//       func();
+//     }
+//   }
+// }
+// addLoadEvent(nameOfSomeFunctionToRunOnPageLoad);
+// addLoadEvent(function() {
+//   /* more code to run on page load */
+//   gameCanvas = new GameCanvas(800, 450);
+//       gameCanvas.createBoard()
+// });
+
+
+
+
+
 
 window.onload = () => {
+
   $startBtn.onclick = () => {
       document.getElementById("title").remove()
       gameCanvas = new GameCanvas(800, 450);
@@ -33,6 +56,10 @@ window.onload = () => {
   }
   
 
+  $startBtn.innerText = "Begin Pilgrimage"
+  $message.innerText = "Monk, you must bring this modest offering to Most Venerable Buddha Keanu Reeves in order to pay respect. But watch out for the monkeys..."
+  
+  
 
 
 

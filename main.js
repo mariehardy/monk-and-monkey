@@ -314,7 +314,7 @@ class Monkey {
   constructor(x) {
     this.x = x;
     this.y = -350;
-    this.width = 103;
+    this.width = 80;
     this.height = imgMonkey.height - 20;
     this.speedX = 0;
     this.speedY = 0;
@@ -327,7 +327,7 @@ class Monkey {
     return this.y
   }
   left() {
-    return this.x
+    return this.x + 30
   }
   bottom() {
     return this.y + this.height
