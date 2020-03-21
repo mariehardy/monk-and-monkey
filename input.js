@@ -14,35 +14,9 @@ function titleScreen() {
   // x.setAttribute("width", "304");
   // x.setAttribute("height", "228");
   x.setAttribute("alt", "Monk and Monkey");
-
   $main.appendChild(x);
 }
 titleScreen()
-
-
-
-
-// function addLoadEvent(func) {
-//   var oldonload = window.onload;
-//   if (typeof window.onload != 'function') {
-//     window.onload = func;
-//   } else {
-//     window.onload = function() {
-//       if (oldonload) {
-//         oldonload();
-//       }
-//       func();
-//     }
-//   }
-// }
-// addLoadEvent(nameOfSomeFunctionToRunOnPageLoad);
-// addLoadEvent(function() {
-//   /* more code to run on page load */
-//   gameCanvas = new GameCanvas(800, 450);
-//       gameCanvas.createBoard()
-// });
-
-
 
 
 
@@ -66,7 +40,7 @@ window.onload = () => {
 
 
 $startBtn.innerText = "Begin Pilgrimage"
-$message.innerText = "Monk, you must bring this modest offering to Most Venerable Buddha Keanu Reeves in order to pay respect. But watch out for the monkeys..."
+$message.innerText = "Monk, you must bring this modest offering to Most Venerable Buddha Keanu Reeves in order to pay respect. But watch out for the monkey..."
 
 
 

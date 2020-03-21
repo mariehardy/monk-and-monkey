@@ -109,6 +109,7 @@ class GameCanvas {
     stopAudio(soundPain)
     stopAudio(soundGameOver)
     $message.style.visibility = 'hidden';
+    console.log(backgroundImage)
   }
 
 
