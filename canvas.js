@@ -5,6 +5,8 @@ let monkeyArr = [] // array of all obstacles
 
 let frameCounter = 0
 
+let gameRunning = true
+
 
 
 
@@ -65,37 +67,35 @@ class GameCanvas {
     this.draw()
   }
 
+  // When player has won:
+
   nirvana() {
     playAudio(soundsLikeTeenSpirit)
-    // this.clearBoard()
-    $restartBtn.style.visibility = 'visible';
+    $restartBtn.style.display = 'inherit';
     $restartBtn.innerText = "REINCARNATE ANYWAYS"
-    $messageOverlay.style.visibility = 'visible';
+    $messageOverlay.style.display = 'inherit';
     $messageOverlay.innerText = "CONGRATS! YOU HAVE REACHED NIRVANA."
   }
 
+  // When collision between player + obstacle:
+
   gameOver() {
-    // frameCounter = 0
-    // gameCanvas.clearBoard() 
-    // gameRunning = false
-
-    // DISABLE KEY EVENT!!!
-
     backgroundImage.speed = 0
     playAudio(soundGameOver)
     playAudio(soundPain)
-    stopAudio(soundMantra)
+    pauseAudio(soundMantra)
 
-    $restartBtn.style.visibility = 'visible';
+    $restartBtn.style.display = 'inherit';
     $restartBtn.innerText = "REINCARNATE"
-    $messageOverlay.style.visibility = 'visible';
+    $messageOverlay.style.display = 'inherit';
     $messageOverlay.innerText = "MAY YOU BE HAPPY."
   }
 
-  // Reset game to original state
+  // Resets game to original state
 
   reset() {
     gameRunning = true;
+    monkeyArr = [];
     monk.x = 40;
     monk.y =  363;
     monk.stateLookRight = true;
@@ -105,25 +105,27 @@ class GameCanvas {
     backgroundImage.x = 0;
     backgroundImage.totalX = 0;
     backgroundImage.speed = -0.3;
-    stopAudio(soundsLikeTeenSpirit)
-    stopAudio(soundPain)
-    stopAudio(soundGameOver)
-    $message.style.visibility = 'hidden';
-    console.log(backgroundImage)
+    pauseAudio(soundsLikeTeenSpirit);
+    pauseAudio(soundPain);
+    pauseAudio(soundGameOver);
+    $message.style.display = 'none';
   }
 
+  // Draws game board
 
   draw() {
 
     frameCounter++
-    // console.log(frameCounter)
     gameCanvas.clearBoard()
 
+
+    // -----------PLAY AUDIO----------
 
     playAudio(soundMantra)
     playAudio(soundForest)
 
-    // BACKGROUND
+
+    // ----------DRAW BACKGROUND---------
 
     backgroundImage.move();
 
@@ -134,53 +136,58 @@ class GameCanvas {
     }
 
 
-    // DRAW PLAYER
+    // -----------DRAW PLAYER-----------
+
     monk.update()
 
 
+    // -----------DRAW OBSTACLES-----------
 
-    // DRAW OBSTACLES
-
-    // Monkeys fall every 2 second
+    // One monkey falls every 2 second
     if (frameCounter % 120 === 0) {
       playAudio(soundMonkey)
       let randomPosX = Math.floor(Math.random() * 600)
       monkeyArr.push(new Monkey(randomPosX))
     }
-    // console.log(gameRunning)
 
-    // Check collision
+
+    // -----------CHECK COLLISION-----------
+
     monkeyArr.forEach((monkey) => {
 
-      // PUT ALL THIS IN a CHECKCOLLISION FUNCTION
       if (monk.crashWith(monkey)) {
         monk.stateFallOver = true
-
-        gameCanvas.gameOver() //MAKE GAME OVER
+        gameCanvas.gameOver() 
         monkey.updateWinningMonkey()
 
         setTimeout(function () {
           gameRunning = false;
         }, 1000);
 
-
         return
       }
       monkey.updateAnimatedMonkey()
     })
+
+
+    // -----------CHECK IF PLAYER WINS-----------
 
     if (monk.x > 434 && monk.stateGiveOffering) {
       gameCanvas.nirvana()
       setTimeout(function () {
         gameRunning = false;
       }, 1000);
-
     }
+
+
+    // -----------DRAWS ON EVERY FRAMECOUNT 
+    // AS LONG AS GAME IS RUNNING-----------
 
     if (gameRunning) {
-      window.requestAnimationFrame(gameCanvas.draw)
-
+      setTimeout(gameCanvas.draw, 24)
+      // window.requestAnimationFrame(gameCanvas.draw)
     }
+
   }
 
 }
