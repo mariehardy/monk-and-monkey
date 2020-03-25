@@ -132,32 +132,6 @@ let monk = {
     this.stateGiveOffering = true;
     this.stateLookRight = false
     this.stateLookLeft = false
-
-    if (this.x < 434) {
-
-      setTimeout(() => {
-        $messageOverlayBrief.style.display = 'inherit';
-        $messageOverlayBrief.innerText = "COME CLOSER MY CHILD!"
-      }, 100)
-      clearTimeout()
-    }
-
-
-
-    // // function myFunction() {
-    // let  myVar = setTimeout(function(){ 
-    //     $messageOverlayBrief.style.display = 'inherit';
-    //     $messageOverlayBrief.innerText = "COME CLOSER MY CHILD!"
-    //    }, 100);
-    // // }
-    
-    // // function myStopFunction() {
-    //   // $messageOverlayBrief.style.display = 'none';
-    //   clearTimeout(myVar);
-    // // }
-
-    // }
-
   },
 
   update: function () {

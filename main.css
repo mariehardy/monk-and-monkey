@@ -42,6 +42,9 @@ main {
     height: 65px;
     padding-left: 25px;
     padding-right: 25px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+
 }
 
 #title {
@@ -99,4 +102,10 @@ main {
     background-color:white;
     font-weight: 700;
     color: black;
+}
+
+#arrows {
+    position: absolute;
+    top: 700px;
+    left: 300px;
 }
