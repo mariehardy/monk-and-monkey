@@ -24,32 +24,14 @@ var requestAnimFrame = (function(){
 
 
 
-// imgPlayer.onload = function () {
 
-//   var totalNumberOfFrames = 10 // ten images in the image (see the url above)
-//   var imageFrameNumber = 0 // This is changed to make the sprite animate  
-//   var widthOfImage = imgPlayer.width; // find the width of the image
-//   var heightOfImage = imgPlayer.height; // find the height of the image
-//   var widthOfSingleImage = widthOfImage / totalNumberOfFrames; // The width of each image in the spirite
 
-//   setInterval(function () {
-//     context.clearRect(0, 0, 300, 300)
 
-//     imageFrameNumber++; // changes the sprite we look at
-//     imageFrameNumber = imageFrameNumber % totalNumberOfFrames; // Change this from 0 to 1 to 2 ... upto 9 and back to 0 again, then 1...
-
-//     context.drawImage(imgPlayer,
-//       imageFrameNumber * widthOfSingleImage, 0, // x and y - where in the sprite
-//       widthOfSingleImage, heightOfImage, // width and height
-//       30, 30, // x and y - where on the screen
-//       widthOfSingleImage, heightOfImage // width and height
-//     );
-//   }, 100)
-
-//   // console.log(x)
-
-// }
-
+resources.load([
+  'img/sprites.png',
+  'img/terrain.png'
+]);
+resources.onReady(init);
 
 
 

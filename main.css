@@ -60,9 +60,10 @@ main {
 #restart-button{
     /* order: 2; */
     z-index: 2;
-    top: 320px;
     position: absolute;
-    margin-bottom: 20px;
+    top: 320px;
+    /* margin-bottom: 20px; */
+    margin: 0 auto;
     background-color: turquoise;
     border: solid 3px tomato;
     box-shadow: 10px 10px 10px black;
@@ -80,17 +81,15 @@ main {
     position: absolute;
     z-index: 2;
     top: 250px;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin: 0 auto;
     text-align: center;
-    padding-left: 25%;
-    padding-right: 25%;
+    padding: 40px;
     font-size: larger;
     background-color: tomato;
     font-weight: 700;
     color: turquoise;
 }
-#messageOverlayBrief {
+/* #messageOverlayBrief {
     position: absolute;
     z-index: 2;
     top: 250px;
@@ -102,7 +101,7 @@ main {
     background-color:white;
     font-weight: 700;
     color: black;
-}
+} */
 
 #arrows {
     position: absolute;
