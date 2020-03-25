@@ -1,6 +1,8 @@
 let $main = document.getElementsByTagName('main')[0]
 let $startBtn = document.getElementById('start-button')
+$startBtn.style.display = 'none';
 let $message = document.getElementById('message')
+$message.style.display = 'none';
 // let $arrows = document.getElementById('arrows')
 let $restartBtn = document.getElementById('restart-button')
 $restartBtn.style.display = 'none';

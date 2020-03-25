@@ -5,12 +5,14 @@ body {
     text-transform: uppercase;
     background-color: black;
 }
+
 main {
     margin: 30px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 850px;
 }
 
 #message {
@@ -21,8 +23,7 @@ main {
     margin-top: 20px;
     margin-bottom: 20px;
     text-align: center;
-    padding-left: 25%;
-    padding-right: 25%;
+    width: 60%;
 }
 
 #start-button{
@@ -53,7 +54,7 @@ main {
 }
 
 #canvas {
-    position: relative;
+    position: absolute;
     top: 60px;
 }
 
@@ -82,12 +83,9 @@ main {
     /* order: 1; */
     position: absolute;
     z-index: 2;
-    top: 250px;
-    /* margin: 0 auto;
-    width: 90%; */
-    /* margin-top: 40px; */
-
-
+    /* top: 250px; */
+    left: 50%;
+    top: 50%;
     text-align: center;
     padding: 25px 70px;
     font-size: larger;
