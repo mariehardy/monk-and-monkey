@@ -24,17 +24,11 @@ var requestAnimFrame = (function(){
 
 
 
-
-
-
-resources.load([
-  'img/sprites.png',
-  'img/terrain.png'
-]);
-resources.onReady(init);
-
-
-
+// resources.load([
+//   'img/sprites.png',
+//   'img/terrain.png'
+// ]);
+// resources.onReady(init);
 
 
 
