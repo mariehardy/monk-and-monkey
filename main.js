@@ -58,8 +58,8 @@ let arrImg2 = ["./img/monksprite-cutter/tile003.png", "./img/monksprite-cutter/t
 let arrImg3 = ["./img/monksprite-cutter/tile006.png", "./img/monksprite-cutter/tile007.png", "./img/monksprite-cutter/tile008.png"];
 let arrImg4 = ["./img/monksprite-cutter/tile009.png", "./img/monksprite-cutter/tile009.png", "./img/monksprite-cutter/tile009.png", "./img/monksprite-cutter/tile009.png", "./img/monksprite-cutter/tile010.png", "./img/monksprite-cutter/tile011.png"];
 
-let indexMonkAlfonsoSprite = 0;
-let monkAlfonsoSprite = new Image();
+let indexMonk = 0;
+let monkSprite = new Image();
 
 
 let monk = {
@@ -99,7 +99,7 @@ let monk = {
       this.stateLookLeft = true
       this.stateLookRight = false;
       this.stateGiveOffering = false;
-      indexMonkAlfonsoSprite++;
+      indexMonk++;
       this.x -= 2;
     }
 
@@ -109,7 +109,7 @@ let monk = {
       this.stateLookRight = true
       this.stateLookLeft = false
       this.stateGiveOffering = false;
-      indexMonkAlfonsoSprite++;
+      indexMonk++;
       this.x += 4;
     }
   },
@@ -137,33 +137,41 @@ let monk = {
   update: function () {
 
     if (this.stateLookLeft) {
-      monkAlfonsoSprite.src = arrImg2[indexMonkAlfonsoSprite % arrImg2.length];
-      context.drawImage(monkAlfonsoSprite, this.x, this.y, this.width, this.height);
+      monkSprite.src = arrImg2[indexMonk % arrImg2.length];
+      context.drawImage(monkSprite, this.x, this.y, this.width, this.height);
     }
 
     if (this.stateLookRight) {
-      monkAlfonsoSprite.src = arrImg1[indexMonkAlfonsoSprite % arrImg1.length];
-      context.drawImage(monkAlfonsoSprite, this.x, this.y, this.width, this.height);
+      monkSprite.src = arrImg1[indexMonk % arrImg1.length];
+      context.drawImage(monkSprite, this.x, this.y, this.width, this.height);
     }
 
     if (this.stateGiveOffering) {
-      if (frameCounter % 10 === 0 && indexMonkAlfonsoSprite < 2) {
-        indexMonkAlfonsoSprite++;
+
+      if (indexMonk > 2) {
+        indexMonk = 0;
       }
-      monkAlfonsoSprite.src = arrImg3[indexMonkAlfonsoSprite];
-      context.drawImage(monkAlfonsoSprite, this.x, this.y, this.width, this.height);
+      if (frameCounter % 10 === 0 && indexMonk < 2) {
+        indexMonk++;
+      }
+      monkSprite.src = arrImg3[indexMonk];
+      context.drawImage(monkSprite, this.x, this.y, this.width, this.height);
     }
 
     if (this.stateFallOver) {
       this.stateGiveOffering = false;
       this.stateLookRight = false
       this.stateLookLeft = false
-      indexMonkAlfonsoSprite = 0
-      for (let i = 0; i < 5; i++) {
-        indexMonkAlfonsoSprite++;
+
+      if (indexMonk > 5) {
+        indexMonk = 0;
       }
-      monkAlfonsoSprite.src = arrImg4[indexMonkAlfonsoSprite % arrImg4.length];
-      context.drawImage(monkAlfonsoSprite, this.x, this.y, this.width, this.height);
+      if (frameCounter % 10 === 0 && indexMonk < 5) {
+        indexMonk++;
+      }
+
+      monkSprite.src = arrImg4[indexMonk % arrImg4.length];
+      context.drawImage(monkSprite, this.x, this.y, this.width, this.height);
     }
   }
 
@@ -238,16 +246,16 @@ class Monkey {
     }
 
     // let imageFrameNumber = 0;
-    var totalNumberOfFrames = 3 // ten images in the image (see the url above)
+    var totalNumberOfFrames = 3 // three images in the image (see the url above)
     var widthOfImage = imgWinningMonkey.width; // find the width of the image
     var heightOfImage = imgWinningMonkey.height; // find the height of the image
-    var widthOfSingleImage = widthOfImage / totalNumberOfFrames; // The width of each image in the spirite
+    var widthOfSingleImage = widthOfImage / totalNumberOfFrames; // The width of each image in the sprite
 
     // setInterval(function () {
     //   context.clearRect(0, 0, 300, 300)
 
     this.imageFrameNumber++; // changes the sprite we look at
-    this.imageFrameNumber = this.imageFrameNumber % totalNumberOfFrames; // Change this from 0 to 1 to 2 ... upto 9 and back to 0 again, then 1...
+    this.imageFrameNumber = this.imageFrameNumber % totalNumberOfFrames; // Change this from 0 to 1 to 2 ... upto X and back to 0 again, then 1...
 
     context.drawImage(imgWinningMonkey,
       this.imageFrameNumber * widthOfSingleImage, 0, // x and y - where in the sprite

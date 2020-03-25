@@ -8,8 +8,6 @@ let $restartBtn = document.getElementById('restart-button')
 $restartBtn.style.display = 'none';
 let $messageOverlay = document.getElementById('messageOverlay')
 $messageOverlay.style.display = 'none';
-let $messageOverlayBrief = document.getElementById('messageOverlayBrief')
-$messageOverlayBrief.style.display = 'none';
 
 
 // ----------LOADS TITLE SCREEN------------

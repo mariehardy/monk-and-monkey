@@ -22,19 +22,6 @@ var requestAnimFrame = (function(){
 
 
 
-
-
-// resources.load([
-//   'img/sprites.png',
-//   'img/terrain.png'
-// ]);
-// resources.onReady(init);
-
-
-
-
-
-
 class GameCanvas {
   constructor(width, height) {
     this.canvas = document.getElementById('canvas')
