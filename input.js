@@ -79,17 +79,14 @@ document.addEventListener('keydown', event => {   // The same as: document.keydo
       break;
     case 38:
       fired = false;
-      monk.stateLookRight = true;
-      monk.stateGiveOffering = false;
+      monk.moveUp();
       break;
     case 40:
       if (!fired) {
         fired = true;
-        indexMonkAlfonsoSprite = 0;
         monk.giveOffering();
       }
       break;
-      // case 40: if(!fired) {fired = true; monk.duck(); console.log('key down');} break;
   }
 })
 

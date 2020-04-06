@@ -112,6 +112,8 @@ class GameCanvas {
 
     // -----------DRAW PLAYER-----------
 
+
+
     monk.update()
 
 

@@ -48,18 +48,42 @@ let backgroundImage = {
 
 
 
+
+
 // ----------------------------
 // -----------PLAYER-----------
 // ----------------------------
 
 
-let arrImg1 = ["./img/monksprite-cutter/tile000.png", "./img/monksprite-cutter/tile001.png", "./img/monksprite-cutter/tile002.png"];
-let arrImg2 = ["./img/monksprite-cutter/tile003.png", "./img/monksprite-cutter/tile004.png", "./img/monksprite-cutter/tile005.png"];
-let arrImg3 = ["./img/monksprite-cutter/tile006.png", "./img/monksprite-cutter/tile007.png", "./img/monksprite-cutter/tile008.png"];
-let arrImg4 = ["./img/monksprite-cutter/tile009.png", "./img/monksprite-cutter/tile009.png", "./img/monksprite-cutter/tile009.png", "./img/monksprite-cutter/tile009.png", "./img/monksprite-cutter/tile010.png", "./img/monksprite-cutter/tile011.png"];
+let arrImgSrc1 = ["./img/monksprite-cutter/tile000.png", "./img/monksprite-cutter/tile001.png", "./img/monksprite-cutter/tile002.png"];
+let arrImgSrc2 = ["./img/monksprite-cutter/tile003.png", "./img/monksprite-cutter/tile004.png", "./img/monksprite-cutter/tile005.png"];
+let arrImgSrc3 = ["./img/monksprite-cutter/tile006.png", "./img/monksprite-cutter/tile007.png", "./img/monksprite-cutter/tile008.png"];
+let arrImgSrc4 = ["./img/monksprite-cutter/tile009.png", "./img/monksprite-cutter/tile009.png", "./img/monksprite-cutter/tile009.png", "./img/monksprite-cutter/tile009.png", "./img/monksprite-cutter/tile010.png", "./img/monksprite-cutter/tile011.png"];
+
+let arrImg1 = arrImgSrc1.map((src) => {
+  let img = new Image();
+  img.src = src;
+  return img
+})
+let arrImg2 = arrImgSrc2.map((src) => {
+  let img = new Image();
+  img.src = src;
+  return img
+})
+let arrImg3 = arrImgSrc3.map((src) => {
+  let img = new Image();
+  img.src = src;
+  return img
+})
+let arrImg4 = arrImgSrc4.map((src) => {
+  let img = new Image();
+  img.src = src;
+  return img
+})
 
 let indexMonk = 0;
-let monkSprite = new Image();
+
+
 
 
 let monk = {
@@ -102,7 +126,6 @@ let monk = {
       indexMonk++;
       this.x -= 2;
     }
-
   },
   moveRight: function () {
     if (this.x < (canvas.width - 50)) {
@@ -113,37 +136,25 @@ let monk = {
       this.x += 4;
     }
   },
-
-  // duck: function () {
-  //   if (this.height = 50) {
-  //     this.height = 25;
-  //     this.y += 10;
-  //   }
-  // },
-
-  // duckUp: function () {
-  //   // if (this.height = this.height / 2) {
-  //   this.height = 50
-  //   this.y -= this.height / 2;
-  //   // }
-  // },
-
+  moveUp: function () {
+    if (this.stateGiveOffering) {
+      this.stateLookRight = true
+      this.stateGiveOffering = false
+    } 
+  },
   giveOffering: function () {
     this.stateGiveOffering = true;
     this.stateLookRight = false
     this.stateLookLeft = false
   },
-
   update: function () {
 
     if (this.stateLookLeft) {
-      monkSprite.src = arrImg2[indexMonk % arrImg2.length];
-      context.drawImage(monkSprite, this.x, this.y, this.width, this.height);
+      context.drawImage(arrImg2[indexMonk % arrImg2.length], this.x, this.y, this.width, this.height);
     }
 
     if (this.stateLookRight) {
-      monkSprite.src = arrImg1[indexMonk % arrImg1.length];
-      context.drawImage(monkSprite, this.x, this.y, this.width, this.height);
+      context.drawImage(arrImg1[indexMonk % arrImg1.length], this.x, this.y, this.width, this.height);
     }
 
     if (this.stateGiveOffering) {
@@ -154,8 +165,7 @@ let monk = {
       if (frameCounter % 10 === 0 && indexMonk < 2) {
         indexMonk++;
       }
-      monkSprite.src = arrImg3[indexMonk];
-      context.drawImage(monkSprite, this.x, this.y, this.width, this.height);
+      context.drawImage(arrImg3[indexMonk], this.x, this.y, this.width, this.height);
     }
 
     if (this.stateFallOver) {
@@ -169,9 +179,7 @@ let monk = {
       if (frameCounter % 10 === 0 && indexMonk < 5) {
         indexMonk++;
       }
-
-      monkSprite.src = arrImg4[indexMonk % arrImg4.length];
-      context.drawImage(monkSprite, this.x, this.y, this.width, this.height);
+      context.drawImage(arrImg4[indexMonk % arrImg4.length], this.x, this.y, this.width, this.height);
     }
   }
 
@@ -245,14 +253,10 @@ class Monkey {
       this.velocityY *= -1;
     }
 
-    // let imageFrameNumber = 0;
     var totalNumberOfFrames = 3 // three images in the image (see the url above)
     var widthOfImage = imgWinningMonkey.width; // find the width of the image
     var heightOfImage = imgWinningMonkey.height; // find the height of the image
     var widthOfSingleImage = widthOfImage / totalNumberOfFrames; // The width of each image in the sprite
-
-    // setInterval(function () {
-    //   context.clearRect(0, 0, 300, 300)
 
     this.imageFrameNumber++; // changes the sprite we look at
     this.imageFrameNumber = this.imageFrameNumber % totalNumberOfFrames; // Change this from 0 to 1 to 2 ... upto X and back to 0 again, then 1...
