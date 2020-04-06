@@ -21,11 +21,10 @@ function titleScreen() {
 }
 titleScreen()
 
-
-$startBtn.style.display = 'inherit';
 $startBtn.innerText = "Begin Pilgrimage"
+$startBtn.style.display = 'inherit';
+$message.innerText = "Monk, you must bring this modest offering to Most Venerable Buddha Keanu Reeves in order to pay respect. But watch out for the monkey... Play on your favourite desktop browser, using arrow keys."
 $message.style.display = 'inherit';
-$message.innerText = "Monk, you must bring this modest offering to Most Venerable Buddha Keanu Reeves in order to pay respect. But watch out for the monkey..."
 
 
 // function arrowImg() {
@@ -52,7 +51,6 @@ window.onload = () => {
   };
   $restartBtn.onclick = () => {
     document.location.reload();
-    // gameCanvas.reset()
     gameCanvas = new GameCanvas(800, 450);
     gameCanvas.createBoard()
     $restartBtn.style.display = 'none';

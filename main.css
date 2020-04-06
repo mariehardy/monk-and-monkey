@@ -1,6 +1,6 @@
 body {
     font-family: 'Courier New', Courier, monospace;
-    font-size: large;
+    font-size: medium;
     color: turquoise;
     text-transform: uppercase;
     background-color: black;
@@ -16,7 +16,6 @@ main {
 }
 
 #message {
-    /* order: 1; */
     position: absolute;
     z-index: 2;
     top: 540px;
@@ -27,7 +26,6 @@ main {
 }
 
 #start-button{
-    /* order: 2; */
     z-index: 2;
     top: 465px;
     position: absolute;
@@ -59,7 +57,6 @@ main {
 }
 
 #restart-button{
-    /* order: 2; */
     z-index: 3;
     position: absolute;
     top: 320px;
@@ -79,7 +76,6 @@ main {
     padding-bottom: 15px;
 }
 #messageOverlay {
-    /* order: 1; */
     position: absolute;
     z-index: 2;
     top: 250px;
