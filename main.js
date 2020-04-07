@@ -133,7 +133,7 @@ let monk = {
       this.stateLookLeft = false
       this.stateGiveOffering = false;
       indexMonk++;
-      this.x += 4;
+      this.x += 2;
     }
   },
   moveUp: function () {

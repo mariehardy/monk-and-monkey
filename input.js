@@ -21,10 +21,10 @@ function titleScreen() {
 }
 titleScreen()
 
-$startBtn.innerText = "Begin Pilgrimage"
 $startBtn.style.display = 'inherit';
-$message.innerText = "Monk, you must bring this modest offering to Most Venerable Buddha Keanu Reeves in order to pay respect. But watch out for the monkey... Play on your favourite desktop browser, using arrow keys."
+$startBtn.innerText = "Begin Pilgrimage"
 $message.style.display = 'inherit';
+$message.innerText = "Monk, you must bring this modest offering to Most Venerable Buddha Keanu Reeves in order to pay respect. But watch out for the monkey... [Play on your favourite desktop browser, using arrow keys.]"
 
 
 // function arrowImg() {

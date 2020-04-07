@@ -148,7 +148,7 @@ class GameCanvas {
 
     // -----------CHECK IF PLAYER WINS-----------
 
-    if (monk.x > 434 && monk.stateGiveOffering) {
+    if (monk.x > 434 && monk.stateGiveOffering && backgroundImage.speed === 0) {
       gameCanvas.nirvana()
       setTimeout(function () {
         gameRunning = false;
